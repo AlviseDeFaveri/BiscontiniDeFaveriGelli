@@ -20,7 +20,7 @@
 <u>Individuals</u>:
 
 * **register** to the application
-* have *security number or fiscal code*
+* have *social security number or fiscal code*
 * have *smartwatch or other devices*
 * **agree**  data treatment
 * **accept or refuse** access to data from 3rd parties

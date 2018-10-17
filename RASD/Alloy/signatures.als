@@ -1,5 +1,6 @@
 open util/time
 open util/integer
+open util/boolean
 
 /** Signatures **/
 
@@ -16,8 +17,9 @@ one sig AboveThreshold extends  HealthStatus {}
 -- Health status KO => AutomatedSOS calls Ambulance
 one sig BelowThreshold extends HealthStatus {}
 
-
+-- TrackMe User
 abstract sig User {}
+-- Data4HelpUser
 sig Individual extends User {
 	fiscalCode: one String,
 	position: Position one -> Time,
@@ -39,6 +41,14 @@ sig Request {
 	#individual > 1 implies (requestStatus = Accepted <=> #individual >=  1000)
 }
 
+abstract sig AmbulanceStatus {}
+one sig Free extends AmbulanceStatus {}
+one sig Busy extends AmbulanceStatus {}
+
+sig Ambulance {
+	status: one AmbulanceStatus
+}
+
 sig Path {}
 sig Run {
 	path: one Path,
@@ -51,7 +61,7 @@ sig Run {
 
 -- There cannot be two users with the same fiscal code
 fact fiscalCodeIsUnique {
-	no disjoint i1, i2: Individual | i1.fiscalCode = i2.fiscalCode
+	no disj i1, i2: Individual | i1.fiscalCode = i2.fiscalCode
 }
 
 /** Dynamic Model **/
@@ -59,6 +69,8 @@ fact fiscalCodeIsUnique {
 pred enrollParticipantToRun [r, r': Run, p: RunParticipant] {
 	r'.participants = r.participants + p
 }
+
+pred callAmbulance [a: Ambulance
 
 
 

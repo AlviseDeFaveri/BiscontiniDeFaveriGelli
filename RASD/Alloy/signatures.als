@@ -17,18 +17,23 @@ one sig AboveThreshold extends  HealthStatus {}
 -- Health status KO => AutomatedSOS calls Ambulance
 one sig BelowThreshold extends HealthStatus {}
 
--- TrackMe User
+
 abstract sig User {}
--- Data4HelpUser
-sig Individual extends User {
-	fiscalCode: one String,
+abstract sig Individual extends User {
+	fiscalCode: one String
+}
+sig ThirdParty extends User {
+	vatNumber: one String
+}
+sig Data4HelpUser extends User {
 	position: Position one -> Time,
 	healthStatus: one HealthStatus
 }
-sig RunOrganizer extends User {}
-sig RunParticipant extends Individual {}
+sig RunOrganizer extends Individual {}
 sig RunSpectator extends Individual {}
-sig ThirdParty extends User {}
+sig AutomatedSOSUser extends Data4HelpUser {}
+sig Track4RunRunner extends Data4HelpUser {}
+
 
 abstract sig RequestStatus {}
 one sig Accepted extends RequestStatus {}
@@ -50,8 +55,14 @@ sig Ambulance {
 }
 
 sig Path {}
+abstract sig RunStatus {}
+one sig NotStarted extends RunStatus {}
+one sig Started extends RunStatus {}
+one sig Finished extends RunStatus {}
+
 sig Run {
 	path: one Path,
+	status: one RunStatus,
 	organizers: some RunOrganizer,
 	participants: some RunParticipant,
 	spectators: set RunSpectator
@@ -62,6 +73,11 @@ sig Run {
 -- There cannot be two users with the same fiscal code
 fact fiscalCodeIsUnique {
 	no disj i1, i2: Individual | i1.fiscalCode = i2.fiscalCode
+}
+
+-- There cannot be two third parties with the same VAT number
+fact vatNumberIsUnique {
+	no disj t1, t2: ThirdParty | t1.vatNumber = t2.vatNumber
 }
 
 /** Dynamic Model **/

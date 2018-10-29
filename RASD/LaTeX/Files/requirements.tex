@@ -11,7 +11,9 @@ While talking, John tells his friend Matt about a new service called Data4Help t
 After filling the form he clicks on the final checkbox to accept the personal data treatment policy.
 Right after clicking on the "Submit" button, Frank receives a notification saying he successfully registered to Data4Help.
 \subsubsection{Scenario 2}
-Mary, a Data4Help customer, received for her birthday the new Eppol iClock. After the initial setting of the device, she decides to download the Data4Help application for her smartwatch. Once installed, she logs in with her accountand right after that, the "Device Management" view of the application appears. Mary taps on the iClock icon and by selecting "Heart Rate" from a dropdown she assigns the tracking of that paramater to her smartwatch. With the same procedure, she assigns to her smartphone the tracking of the "Position" parameter.
+Mary, a Data4Help customer, received for her birthday the new Eppol iClock. After the initial setting of the device, she decides to download the Data4Help application for her smartwatch. Once installed, she logs in with her accountand right after that, the "Device Management"
+%secondo me meglio un home page qui
+ view of the application appears. Mary taps on the iClock icon and by selecting "Heart Rate" from a dropdown she assigns the tracking of that paramater to her smartwatch. With the same procedure, she assigns to her smartphone the tracking of the "Position" parameter.
 Finally, she clicks on the "Confirm" button and the app saves the settings and returns back to the home page.
 \subsubsection{Scenario 3}
 Steve, a Data4Help customer with diabete, needs to periodically check the glucose levels observed by his medical device connected with the Data4Help application on his smartphone. For doing this, he starts the Data4Help application and when the homepage shows up he  clicks on the "myData" tab. A nice view appears, containing all the information about his monitored health parameters with a lot of colorful diagrams. Steve f ilters out the displayed content by selecting the "Glucose Level" radio button on the top of the page and he changes the information granularity from "Week" to "Day" using a dropdown.  
@@ -28,6 +30,223 @@ Pfuzer, a big pharmaceutical company registered to Data4Help service, needs to g
 \subsubsection{Scenario 8}
 \subsubsection{Scenario 9}
 \subsubsection{Scenario 10}
+\subsection{Use Case}
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & User registration \\ \hline
+Actor            & User \\ \hline
+Entry conditions & App installed on user's device (and run while not logged in?) \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on the "Subscribe" button
+\item Fill the registration form and the account credentials
+\item Accept the terms of service and the privacy policy
+\item Click on the "Submit" button
+\item The system elaborate the registration and send back a notification
+\end{enumerate} 
+\\ \hline
+Exit conditions  & Registration is successful and the user is informed via notification \\ \hline
+Exceptions       & \begin{enumerate}
+\item The user is already registered
+\item There is some invalid data in the form
+\item The email is already used
+\item Terms of service or Privacy policy haven't been checked
+\end{enumerate}\\ all the exceptions take the user back to the registration procedure \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & User log in \\ \hline
+Actor            & User \\ \hline
+Entry conditions & App installed on user's device and user already registered to Data4Help \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on the "Log in" button
+\item The user enter his/her credentials
+\item Click on the "Enter" button
+\item The log in was successful and the user is redirected to the home page of the App
+\end{enumerate} \\ \hline
+Exit conditions  & The log in is successful and the user is redirected to home page \\ \hline
+Exceptions       & \begin{enumerate}
+\item Credentials aren't valid
+\end{enumerate} \\ the exceptions are notified to the user and the Log in procedure restart \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Device Management \\ \hline
+Actor            & User \\ \hline
+Entry conditions & User enter in the "Device Management" pannel of the App \\ \hline
+Events flow      & \begin{enumerate}
+\item The list of devices connected to the account is shown
+\item The user select which device to configure
+\item For that device, the list of all the possible parameter that it can track is shown
+\item The user turn On/Off the tracking of each parameter
+\item Click on the "Confirm" button
+\end{enumerate} \\ \hline
+Exit conditions  & The user have set his/her preference and saves them \\ \hline
+Exceptions       & \begin{enumerate}
+\item the parameter is already tracked from a more reliable source (maybe??)
+\end{enumerate} \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & MyData \\ \hline
+Actor            & User \\ \hline
+Entry conditions & User enter in the "MyData" tab of the app \\ \hline
+Events flow      & \begin{enumerate}
+\item The system shows all the user gathered info
+\item A top bar is presented to the user to filter the search
+\item Whenever a filer is changed the app respond with the filtered information
+\end{enumerate} \\ \hline
+Exit conditions  & The user exit the information tab \\ \hline
+Exceptions       & \begin{enumerate}
+\item the system haven't gathered any info yet
+\end{enumerate} \\ the exceptions are notified to the user and the MyData page is shown with the available data \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Third Party Registration \\ \hline
+Actor            & Third Party \\ \hline
+Entry conditions & The third party clicks on "Business Solutions" on www.trackme.com/data4help \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on the "Register" button
+\item Fill the form with information regarding the company
+\item click on the "Submit" button
+\end{enumerate} \\ \hline
+Exit conditions  & Registration is completed and a notification is sent via e-mail \\ \hline
+Exceptions       & \begin{enumerate}
+\item Company already registered
+\item email already in use
+\end{enumerate}\\ all the exceptions are notified and the procedure goes back to registration \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Third Party Log in \\ \hline
+Actor            & Third Party \\ \hline
+Entry conditions & The third party goes on www.trackme.com/data4help and click "Log in" \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on the "Log in" button
+\item Enter the company credentials
+\item Click on the "Enter" button
+\end{enumerate} \\ \hline
+Exit conditions  & Log in is successful and the client is redirected to its reserved page  \\ \hline
+Exceptions       & \begin{enumerate}
+\item Credentials aren't valid
+\end{enumerate} \\ the exceptions are notified to the client and the Log in procedure restart  \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Single Data Request \\ \hline
+Actor            & Third Party, User \\ \hline
+Entry conditions & A third party client is logged in and goes under "Single Data Request"  \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on "Single Data Request"
+\item Insert the fiscal code of the person whose data are requested
+\item Check which data to monitor form a checklist
+\item Select the observation period
+\item Click on "Send" button
+\item The request is notified to the user
+\item The user logs into the App and goes under "Incoming Request"
+\item The user select whether or not to accept the request
+\item The result is notified via e-mail to the third party
+\item If the user accepted, the information are made available under the "Sent Request" section of the Data4Help personal page of the company
+\end{enumerate} \\ \hline
+Exit conditions  & The user has responded to the request and, if successful, the data are made available to the third company \\ \hline
+Exceptions       & \begin{itemize}
+\item The observation period covers a time period in the future
+\end{itemize} This exception launches the subscription procedure
+\begin{enumerate}
+\item The user refuse the request
+\end{enumerate} the exception is notified to the third party and the request ends\\  \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Aggregate Data Request \\ \hline
+Actor            & Third Party, Data4Help (maybe?) \\ \hline
+Entry conditions & A third party client is logged in and goes under "Aggregate Data Request" \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on "Aggregate Data Request"
+\item Insert the location of the data
+\item Select the age range
+\item Customize any other filter on the data
+\item Click the "Send request" button
+\item The request is elaborated throught the Anonym? procedure
+\item On request successful, the data are made available uder the "Sent Request" section of the Data4Help personal page of the company
+\end{enumerate} \\ \hline
+Exit conditions  & The request was successful and the data are made available to the third company \\ \hline
+Exceptions       & \begin{itemize}
+\item An observation period is selected and it covers a time period in the future
+\end{itemize} This exception launches the subscription procedure
+\begin{enumerate}
+\item Anonym? returns request rejected due to lack of anonymity
+\end{enumerate} The exception notifies the third party on reasons of the rejection and returns to the Aggregate Data Request page\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Data Subscription \\ \hline
+Actor            & Third party \\ \hline
+Entry conditions & A request, for single or aggregate data, has been made with an observation period that extend in the future \\ \hline
+Events flow      & \begin{enumerate}
+\item If the request is successful, the third company is updated about the changes in the data that it requested
+\end{enumerate} \\ \hline
+Exit conditions  & The observation period elapses and the subscription end \\ \hline
+Exceptions       & \begin{enumerate}
+\item Data aren't available anymore
+\end{enumerate} The exception are notified to the client via e-mail \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Anonym? \\ \hline
+Actor            & Data4Help \\ \hline
+Entry conditions & Data4Help recives a request for aggregate data and the system algorithm anonymize the data \\ \hline
+Events flow      & \begin{enumerate}
+\item An aggregate request arrives at Data4Help
+\item The anonymization algorithm launches on the available data
+\item It return the anonymized data to be seen by the third party
+\end{enumerate} \\ \hline
+Exit conditions  & The data were successfully anonymized by the algorithm \\ \hline
+Exceptions       & \begin{enumerate}
+\item The available data are scarce ($<=$1000) hence the anonymization is impossible
+\end{enumerate} This exception notifies the third party that its request has been rejected\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & test \\ \hline
+Actor            & test \\ \hline
+Entry conditions & test \\ \hline
+Events flow      & test \\ \hline
+Exit conditions  & test \\ \hline
+Exceptions       & test \\ \hline
+\end{tabular}
+\end{table}
 \subsection{Performance Requirements}
 \subsection{Design Constraints}
 \subsubsection{Standard compliance}

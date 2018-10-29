@@ -24,17 +24,22 @@
 \BOOKMARK [3][-]{subsubsection.3.3.4}{Scenario 4}{subsection.3.3}% 24
 \BOOKMARK [3][-]{subsubsection.3.3.5}{Scenario 5}{subsection.3.3}% 25
 \BOOKMARK [3][-]{subsubsection.3.3.6}{Scenario 6}{subsection.3.3}% 26
-\BOOKMARK [2][-]{subsection.3.4}{Performance Requirements}{section.3}% 27
-\BOOKMARK [2][-]{subsection.3.5}{Design Constraints}{section.3}% 28
-\BOOKMARK [3][-]{subsubsection.3.5.1}{Standard compliance}{subsection.3.5}% 29
-\BOOKMARK [3][-]{subsubsection.3.5.2}{Hardware limitations}{subsection.3.5}% 30
-\BOOKMARK [3][-]{subsubsection.3.5.3}{Any other constraint}{subsection.3.5}% 31
-\BOOKMARK [2][-]{subsection.3.6}{Software System Attributes}{section.3}% 32
-\BOOKMARK [3][-]{subsubsection.3.6.1}{Reliability}{subsection.3.6}% 33
-\BOOKMARK [3][-]{subsubsection.3.6.2}{Availability}{subsection.3.6}% 34
-\BOOKMARK [3][-]{subsubsection.3.6.3}{Security}{subsection.3.6}% 35
-\BOOKMARK [3][-]{subsubsection.3.6.4}{Maintainability}{subsection.3.6}% 36
-\BOOKMARK [3][-]{subsubsection.3.6.5}{Portability}{subsection.3.6}% 37
-\BOOKMARK [1][-]{section.4}{Formal Analysis Using Alloy}{}% 38
-\BOOKMARK [1][-]{section.5}{Effort Spent}{}% 39
-\BOOKMARK [1][-]{section.6}{References}{}% 40
+\BOOKMARK [3][-]{subsubsection.3.3.7}{Scenario 7}{subsection.3.3}% 27
+\BOOKMARK [3][-]{subsubsection.3.3.8}{Scenario 8}{subsection.3.3}% 28
+\BOOKMARK [3][-]{subsubsection.3.3.9}{Scenario 9}{subsection.3.3}% 29
+\BOOKMARK [3][-]{subsubsection.3.3.10}{Scenario 10}{subsection.3.3}% 30
+\BOOKMARK [2][-]{subsection.3.4}{Use Case}{section.3}% 31
+\BOOKMARK [2][-]{subsection.3.5}{Performance Requirements}{section.3}% 32
+\BOOKMARK [2][-]{subsection.3.6}{Design Constraints}{section.3}% 33
+\BOOKMARK [3][-]{subsubsection.3.6.1}{Standard compliance}{subsection.3.6}% 34
+\BOOKMARK [3][-]{subsubsection.3.6.2}{Hardware limitations}{subsection.3.6}% 35
+\BOOKMARK [3][-]{subsubsection.3.6.3}{Any other constraint}{subsection.3.6}% 36
+\BOOKMARK [2][-]{subsection.3.7}{Software System Attributes}{section.3}% 37
+\BOOKMARK [3][-]{subsubsection.3.7.1}{Reliability}{subsection.3.7}% 38
+\BOOKMARK [3][-]{subsubsection.3.7.2}{Availability}{subsection.3.7}% 39
+\BOOKMARK [3][-]{subsubsection.3.7.3}{Security}{subsection.3.7}% 40
+\BOOKMARK [3][-]{subsubsection.3.7.4}{Maintainability}{subsection.3.7}% 41
+\BOOKMARK [3][-]{subsubsection.3.7.5}{Portability}{subsection.3.7}% 42
+\BOOKMARK [1][-]{section.4}{Formal Analysis Using Alloy}{}% 43
+\BOOKMARK [1][-]{section.5}{Effort Spent}{}% 44
+\BOOKMARK [1][-]{section.6}{References}{}% 45

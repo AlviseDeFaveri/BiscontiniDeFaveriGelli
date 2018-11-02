@@ -127,7 +127,7 @@ Entry conditions & The third party clicks on "Business Solutions" on www.trackme
 Events flow      & \begin{enumerate}
 \item Click on the "Register" button
 \item Fill the form with information regarding the company
-\item click on the "Submit" button
+\item Click on the "Submit" button
 \end{enumerate} \\ \hline
 Exit conditions  & Registration is completed and a notification is sent via e-mail \\ \hline
 Exceptions       & \begin{enumerate}
@@ -188,7 +188,7 @@ Exceptions       & \begin{itemize}
 \hline
 Name             & Aggregate Data Request \\ \hline
 Actor            & Third Party, Data4Help (maybe?) \\ \hline
-Entry conditions & A third party client is logged in and goes under "Aggregate Data Request" \\ \hline
+Entry conditions & A ttesthird party client is logged in and goes under "Aggregate Data Request" \\ \hline
 Events flow      & \begin{enumerate}
 \item Click on "Aggregate Data Request"
 \item Insert the location of the data
@@ -245,14 +245,177 @@ Exceptions       & \begin{enumerate}
 \begin{table}[]
 \begin{tabular}{|l|l|}
 \hline
+Name             & AutomatedSOS Subscription \\ \hline
+Actor            & User, AutomatedSOS \\ \hline
+Entry conditions & User enters in the "AutomatedSOS" pannel under the App \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on "Subscribe"
+\item Configure the settings
+\item Accept clauses
+\item Start Supervisor
+\end{enumerate} \\ \hline
+Exit conditions  & The user has subscribed to the service and the Supervisor starts \\ \hline
+Exceptions       & \begin{enumerate}
+\item User cannot access to the service due to lack of devices that can track his/her real time status
+\end{enumerate} The exceptions are notified to the client that is brought back to the AutomatedSOS panel\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Supervisor \\ \hline
+Actor            & AutomatedSOS, User, Third party (emergency) \\ \hline
+Entry conditions & The user has subscribed successfully to the AutomatedSOS service and his/her supervisor has started \\ \hline
+Events flow      & \begin{enumerate}
+\item Monitor real time data
+\item Check for threshold constraint
+\item Repeat
+\end{enumerate} \\ \hline
+Exit conditions  & User unsubscribe from the AutomatedSOS service \\ \hline
+Exceptions       & \begin{itemize}
+\item Some parameter went over its threshold
+\end{itemize} This exception notifies the client and AutometedSOS system proceed to call emergency numbers \begin{enumerate}
+\item Lost device for data acquisition
+\end{enumerate} This exception notifies the client and pause the Supervisor until the problem is fixed \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Run enroll \\ \hline
+Actor            & User, Track4Run \\ \hline
+Entry conditions & User enters in the "Enroll" panel, under the "Track4Run" tab in the App  \\ \hline
+Events flow      & \begin{enumerate}
+\item Choose from a list to which run to enroll
+\item Click on the "Enroll" button
+\item Accept the clauses
+\item Process the enrollment and start the Tracker
+\end{enumerate} \\ \hline
+Exit conditions  & The user has successfully enrolled to the run and the Tracker started running \\ \hline
+Exceptions       & \begin{enumerate}
+\item The user doen't possess a device able to Track the runner
+\item The user is in a bad shape for a run, medical advice is suggested
+\end{enumerate} This exceptions is notified to the client and the procedure goes on\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Tracker \\ \hline
+Actor            & Track4Run, User,  \\ \hline
+Entry conditions & The user has enrolled for a run \\ \hline
+Events flow      & \begin{enumerate}
+\item Stay on idle till starts of the run
+\item On wake up, keep track of real time location of the user
+\end{enumerate} \\ \hline
+Exit conditions  & The run ends and the Tracker leave the user \\ \hline
+Exceptions       & \begin{enumerate}
+\item Lost device for real time location
+\end{enumerate} This exception is notified to the client and the procedure goes on
+\begin{enumerate}
+\item User unsubscribe form the Run
+\end{enumerate} This exception kills the Tracker and remove the user from the run\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Run "unsubscription" \\ \hline
+Actor            & User, Track4Run \\ \hline
+Entry conditions & User already enrolled on a Run and he/she want to unsubscribe \\ \hline
+Events flow      & \begin{enumerate}
+\item Look up under "Your Runs" tab for the desired run
+\item Click on the "Unsubscribe" button
+\item Notifies the Tracker
+\end{enumerate} \\ \hline
+Exit conditions  & User has successfully unsubscribed from the run \\ \hline
+Exceptions       & ? \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Watch Run \\ \hline
+Actor            & User (Spectator), Track4Run, Users (Runners) \\ \hline
+Entry conditions & A spectator goes under the "Live" section of Track4Run and select an ongoing run \\ \hline
+Events flow      & \begin{enumerate}
+\item Select a Run form the list of ongoing runs
+\item Enter information about the desired runner
+\item Watch the map of the run with the real time GPS tracking of the searched runner
+\end{enumerate} \\ \hline
+Exit conditions  & Run ends or spectator exit from the live page \\ \hline
+Exceptions       & \begin{enumerate}
+\item Runner has connection problems
+\item Spectator has connection problems
+\item Server has connection problems
+\end{enumerate} All exception are notified to the spectator and the process goes on\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Create a Run \\ \hline
+Actor            & User (Organizer), Track4Run \\ \hline
+Entry conditions & The organizer goes under the "Create Run" panel of the Track4Run section of the App \\ \hline
+Events flow      & \begin{enumerate}
+\item Click on the "Create Run" button
+\item Enter information about the run
+\item Select the run path from the map
+\item Click on the "Create" button
+\end{enumerate} \\ \hline
+Exit conditions  & The organizer has successfully created a run \\ \hline
+Exceptions       & ?\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & Run modification/cancellation \\ \hline
+Actor            & User (Organizer), Track4Run \\ \hline
+Entry conditions & The organizer goes under the "Your Run" panel of the Track4Run section of the App \\ \hline
+Events flow      & \begin{enumerate}
+\item Select the run you want to modify
+\item Modify the information of the run
+\item Modify the path of the run from the map
+\item Select whether to cancel or not the run
+\item Click on the "Confirm" button
+\end{enumerate} \\ \hline
+Exit conditions  & The organizer has successfully modified or canceled the run \\ \hline
+Exceptions       & On success, notifies all the partecipants about the changes\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
 Name             & test \\ \hline
 Actor            & test \\ \hline
 Entry conditions & test \\ \hline
 Events flow      & test \\ \hline
 Exit conditions  & test \\ \hline
-Exceptions       & test \\ \hline
+Exceptions       & test\\ \hline
 \end{tabular}
 \end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Name             & test \\ \hline
+Actor            & test \\ \hline
+Entry conditions & test \\ \hline
+Events flow      & test \\ \hline
+Exit conditions  & test \\ \hline
+Exceptions       & test\\ \hline
+\end{tabular}
+\end{table}
+
 \subsection{Performance Requirements}
 \subsection{Design Constraints}
 \subsubsection{Standard compliance}

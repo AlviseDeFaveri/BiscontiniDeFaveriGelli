@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.10.25)  30 OCT 2018 19:28
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.7.1)  31 OCT 2018 11:43
+>>>>>>> e45d97ae477f58c2c6f057cd96f73fce7b047d3c
 entering extended mode
 **./main.tex
 (main.tex
@@ -4237,11 +4241,19 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 137.
 ### simple group (level 1) entered at line 124 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  20851 strings out of 492970
  381071 string characters out of 3135834
  487408 words of memory out of 3000000
  24140 multiletter control sequences out of 15000+200000
  53386 words of font info for 65 fonts, out of 3000000 for 9000
+=======
+ 20766 strings out of 492649
+ 376684 string characters out of 6135779
+ 485229 words of memory out of 5000000
+ 24071 multiletter control sequences out of 15000+600000
+ 53386 words of font info for 65 fonts, out of 8000000 for 9000
+>>>>>>> e45d97ae477f58c2c6f057cd96f73fce7b047d3c
  1141 hyphenation exceptions out of 8191
  59i,11n,65p,930b,396s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/P

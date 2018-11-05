@@ -38,7 +38,7 @@ At first he sets the threshold of the tracked parameters with the help of his do
 \subsubsection{Scenario 10}
 \subsection{Use Case}
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & User registration \\ \hline
 Actor            & User \\ \hline
@@ -57,12 +57,12 @@ Exceptions       & \begin{enumerate}
 \item There is some invalid data in the form
 \item The email is already used
 \item Terms of service or Privacy policy haven't been checked
-\end{enumerate}\\ all the exceptions take the user back to the registration procedure \\ \hline
+\end{enumerate} All the exceptions take the user back to the registration procedure \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & User log in \\ \hline
 Actor            & User \\ \hline
@@ -76,12 +76,12 @@ Events flow      & \begin{enumerate}
 Exit conditions  & The log in is successful and the user is redirected to home page \\ \hline
 Exceptions       & \begin{enumerate}
 \item Credentials aren't valid
-\end{enumerate} \\ the exceptions are notified to the user and the Log in procedure restart \hline
+\end{enumerate} The exceptions are notified to the user and the Log in procedure restart \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Device Management \\ \hline
 Actor            & User \\ \hline
@@ -101,7 +101,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & MyData \\ \hline
 Actor            & User \\ \hline
@@ -114,12 +114,12 @@ Events flow      & \begin{enumerate}
 Exit conditions  & The user exit the information tab \\ \hline
 Exceptions       & \begin{enumerate}
 \item the system haven't gathered any info yet
-\end{enumerate} \\ the exceptions are notified to the user and the MyData page is shown with the available data \hline
+\end{enumerate} The exceptions are notified to the user and the MyData page is shown with the available data \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Third Party Registration \\ \hline
 Actor            & Third Party \\ \hline
@@ -133,12 +133,12 @@ Exit conditions  & Registration is completed and a notification is sent via e-ma
 Exceptions       & \begin{enumerate}
 \item Company already registered
 \item email already in use
-\end{enumerate}\\ all the exceptions are notified and the procedure goes back to registration \hline
+\end{enumerate} All the exceptions are notified and the procedure goes back to registration \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Third Party Log in \\ \hline
 Actor            & Third Party \\ \hline
@@ -151,12 +151,12 @@ Events flow      & \begin{enumerate}
 Exit conditions  & Log in is successful and the client is redirected to its reserved page  \\ \hline
 Exceptions       & \begin{enumerate}
 \item Credentials aren't valid
-\end{enumerate} \\ the exceptions are notified to the client and the Log in procedure restart  \hline
+\end{enumerate} The exceptions are notified to the client and the Log in procedure restart  \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Single Data Request \\ \hline
 Actor            & Third Party, User \\ \hline
@@ -179,12 +179,12 @@ Exceptions       & \begin{itemize}
 \end{itemize} This exception launches the subscription procedure
 \begin{enumerate}
 \item The user refuse the request
-\end{enumerate} the exception is notified to the third party and the request ends\\  \hline
+\end{enumerate} This exception is notified to the third party and the request ends\\  \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Aggregate Data Request \\ \hline
 Actor            & Third Party, Data4Help (maybe?) \\ \hline
@@ -209,7 +209,7 @@ Exceptions       & \begin{itemize}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Data Subscription \\ \hline
 Actor            & Third party \\ \hline
@@ -225,7 +225,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Anonym? \\ \hline
 Actor            & Data4Help \\ \hline
@@ -243,7 +243,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & AutomatedSOS Subscription \\ \hline
 Actor            & User, AutomatedSOS \\ \hline
@@ -262,7 +262,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Supervisor \\ \hline
 Actor            & AutomatedSOS, User, Third party (emergency) \\ \hline
@@ -282,7 +282,7 @@ Exceptions       & \begin{itemize}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run enroll \\ \hline
 Actor            & User, Track4Run \\ \hline
@@ -302,7 +302,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Tracker \\ \hline
 Actor            & Track4Run, User,  \\ \hline
@@ -322,7 +322,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run "unsubscription" \\ \hline
 Actor            & User, Track4Run \\ \hline
@@ -338,7 +338,7 @@ Exceptions       & ? \\ \hline
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Watch Run \\ \hline
 Actor            & User (Spectator), Track4Run, Users (Runners) \\ \hline
@@ -358,7 +358,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Create a Run \\ \hline
 Actor            & User (Organizer), Track4Run \\ \hline
@@ -375,7 +375,7 @@ Exceptions       & ?\\ \hline
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run modification/cancellation \\ \hline
 Actor            & User (Organizer), Track4Run \\ \hline
@@ -389,30 +389,6 @@ Events flow      & \begin{enumerate}
 \end{enumerate} \\ \hline
 Exit conditions  & The organizer has successfully modified or canceled the run \\ \hline
 Exceptions       & On success, notifies all the partecipants about the changes\\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[]
-\begin{tabular}{|l|l|}
-\hline
-Name             & test \\ \hline
-Actor            & test \\ \hline
-Entry conditions & test \\ \hline
-Events flow      & test \\ \hline
-Exit conditions  & test \\ \hline
-Exceptions       & test\\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[]
-\begin{tabular}{|l|l|}
-\hline
-Name             & test \\ \hline
-Actor            & test \\ \hline
-Entry conditions & test \\ \hline
-Events flow      & test \\ \hline
-Exit conditions  & test \\ \hline
-Exceptions       & test\\ \hline
 \end{tabular}
 \end{table}
 

@@ -13,6 +13,7 @@ Organize this section according to the rules defined in the project description.
 \item \textbf{D1} Fiscal code uniquely identifies a user of the system
 \item \textbf{R2} After registration, a user can log in by using his/her credentials
 \item \textbf{R3} The system acquires user data only after he/she accepted the data acquisition policy
+\item \textbf{R4} The system can acquire data from external applications that register themselves as data sources of a user.
 \item \textbf{D2} Every user owns at least one device capable of retrieving correct real-time health parameters and location
 \item \textbf{D3} User devices must grant to the system access to the requested data
 \item \textbf{D4} User devices must be continuously connected to the internet
@@ -27,19 +28,60 @@ Organize this section according to the rules defined in the project description.
 \item \textbf{D6} Third parties know the monitored user Fiscal Code
 \item \textit{R7 The system is capable of merging multiple user data and anonymize it}
 \item \textbf{R8} The system shall grant access to merged data only if the number	of individuals	whose data satisfy the request is higher than	 1000.	
- 	
-  
+\end{itemize}
 
+\textbf{G3 Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced}
+\begin{itemize}
+\item \textbf{R9} The system must store information about third parties' data subscriptions
+\item \textbf{R10} The system asks to the third parties who want to subscribe to new data to provide a callback interface
+\item \textbf{R11} The system must notify every observing third party through their callbacks whenever an observed data changes. 
+\item \textbf{R12}
+\end{itemize}
+
+\textbf{G5 AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain threshold}
+\begin{itemize}
+\item \textbf{[R12]} AutomatedSOS users must be signed in with a Data4Help account
+\item \textbf{[R13]} AutomatedSOS can use data coming from Data4Help to monitor the health condition of its users
+\item \textbf{[R14]} AutomatedSOS, when possible, uses data coming directly from the device sensors.
+\item \textbf{[R15]} When activated, AutomatedSOS provides some default values for parameters thresholds
+\item \textbf{[R16]} AutomatedSOS gives the user the possibility to set his/her own threshold 
+\item \textbf{[D7]} AutomatedSOS has access to parameters that can be useful for identifying an emergency status
+\end{itemize}
+
+\item \textbf{G6} AutomatedSOS must notify the user and call an ambulance when it detects a health emergency
+\begin{itemize}
+\item \textbf{[D8]} There exists an API through which AutomatedSOS can pass to an ambulance information about the identity, the location and the vital parameters of the person in trouble.
+\item \textbf{[R17]} The system must notify the user before calling the ambulance
+\item \textbf{[R18]} The system gives the possibility to abort the operation within 5 seconds
+\item \textbf{[R19]} The system automatically calls the ambulance if the operation is not aborted
+\end{itemize}
+
+\item \textbf{G7} Track4Run allows an organizer to create and manage a run.
+\begin{itemize}
+\item \textbf{[R20]} Track4Run users must be signed in with a Data4Help account
+\item \textbf{[R21]} Track4Run allows organizers to create a "run event" providing the track, the date and a starting and ending time.
+\item \textbf{[R22]}  Track4Run allows organizers to modify the details of the created event
+\item \textbf{[R23]} Track4Run allows organizers to delete his created runs
+\item \textbf{[R24]} Track4Run gives the possibility to the organizers to extend editing permissions of an event to other users (co-organizers) 
+\item \textbf{[R25]} Track4Run can show to an organizer a list of his past, ongoing and future events. 
+\end{itemize}
+
+\textbf{G8} Track4Run allows a user to partecipate to an organized run
+\begin{itemize}
+\item \textbf{[D9]} Track4Run athlete wears the monitoring device during the whole run.
+\item \textbf{[R27]} Track4Run gives the user the possibility to look up for future organized runs and join them. 
+\item \textbf{[R28]} Track4Run gives the user the possibility to unsubscribe from a previously joined run at any moment. 
+\item \textbf{[R29]} Track4Run must keep track of the position of every participant of the run from the start until the end of the event. 
+\end{itemize}
+
+\textbf{G9} Track4Run allows a spectator to track the position of the partecipants of the run
+\begin{itemize}
+\item \textbf{[R30]} Track4Run gives the spectator the possibility to look up for ongoing runs and select the one to follow.
+\item \textbf{[R31]} Track4Run shows to the spectator the position of all the participants of the selected run on a map.
+\item \textbf{[D10]} There is system providing an API to visualize GPS data on a map.
 \end{itemize}
 
 
-\item \textbf{G3} Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced
-\item \textbf{G4} AutomatedSOS must use data coming from Data4Help to monitor the health condition of its users
-\item \textbf{G5} AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain thresholds
-\item \textbf{G6} AutomatedSOS must call an ambulance when it detects a health emergency
-\item \textbf{G7} Track4Run allows a user to become an organizer of a run, so that he/she can create and manage a run
-\item \textbf{G8} Track4Run allows a user to partecipate to an organized run
-\item \textbf{G9} Track4Run allows a spectator to track the position of the partecipants of the run 
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
 While talking, John tells his friend Matt about a new service called Data4Help that helps you keeping track of your health status. Frank, interested in checking his heart rate, downloads the app on his smartphone and fires it up. The app asks him to register to the service by filling a form with his personal information, including his fiscal code and a password of his choice that will be used as credentials for the login. 

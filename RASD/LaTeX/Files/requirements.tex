@@ -5,6 +5,41 @@ Organize this section according to the rules defined in the project description.
 \subsubsection{Software Interfaces}
 \subsubsection{Communication Interfaces}
 \subsection{Functional Requirements}
+\textbf{GG} Data4Help allows the user to examine all his/her collected data
+
+\textbf{[G1] Data4Help must be able to keep track of real time health status and position from registered users' devices}
+\begin{itemize}
+\item \textbf{R1} A user can register to TrackMe's services providing a Fiscal code and a password of their choice
+\item \textbf{D1} Fiscal code uniquely identifies a user of the system
+\item \textbf{R2} After registration, a user can log in by using his/her credentials
+\item \textbf{R3} The system acquires user data only after he/she accepted the data acquisition policy
+\item \textbf{D2} Every user owns at least one device capable of retrieving correct real-time health parameters and location
+\item \textbf{D3} User devices must grant to the system access to the requested data
+\item \textbf{D4} User devices must be continuously connected to the internet
+\end{itemize}
+
+\item \textbf{G2} Data4Help should allow third parties to gather information from a single user or from an anonymous group of users
+\begin{itemize}
+\item \textbf{R4} Third parties can register to Data4Help by providing a VAT code
+\item \textbf{D5} VAT code uniquely identifies a third party in the system
+\item \textbf{R5} The system provides to the registered third parties unique access tokens to use the services
+\item \textbf{R6} The system grants access to a single user data only after his/her confirmation
+\item \textbf{D6} Third parties know the monitored user Fiscal Code
+\item \textit{R7 The system is capable of merging multiple user data and anonymize it}
+\item \textbf{R8} The system shall grant access to merged data only if the number	of individuals	whose data satisfy the request is higher than	 1000.	
+ 	
+  
+
+\end{itemize}
+
+
+\item \textbf{G3} Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced
+\item \textbf{G4} AutomatedSOS must use data coming from Data4Help to monitor the health condition of its users
+\item \textbf{G5} AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain thresholds
+\item \textbf{G6} AutomatedSOS must call an ambulance when it detects a health emergency
+\item \textbf{G7} Track4Run allows a user to become an organizer of a run, so that he/she can create and manage a run
+\item \textbf{G8} Track4Run allows a user to partecipate to an organized run
+\item \textbf{G9} Track4Run allows a spectator to track the position of the partecipants of the run 
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
 While talking, John tells his friend Matt about a new service called Data4Help that helps you keeping track of your health status. Frank, interested in checking his heart rate, downloads the app on his smartphone and fires it up. The app asks him to register to the service by filling a form with his personal information, including his fiscal code and a password of his choice that will be used as credentials for the login. 
@@ -186,6 +221,7 @@ Exceptions       & \begin{itemize}
 \item The observation period covers a time period in the future
 \end{itemize} This exception launches the subscription procedure
 \begin{enumerate}
+\item No user found that correspond to the search
 \item The user refuse the request
 \end{enumerate} This exception is notified to the third party and the request ends\\  \hline
 \end{tabular}

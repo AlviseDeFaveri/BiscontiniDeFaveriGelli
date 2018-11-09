@@ -1,10 +1,49 @@
 Organize this section according to the rules defined in the project description. 
 \subsection{External Interface Requirements}
 \subsubsection{User Interface}
+mockup
 \subsubsection{Hardware Interfaces}
+none
 \subsubsection{Software Interfaces}
+Data acquisition and data retrieval
 \subsubsection{Communication Interfaces}
+REST API, TCP/IP, HTTPS
 \subsection{Functional Requirements}
+\textbf{GG} Data4Help allows the user to examine all his/her collected data
+
+\textbf{[G1] Data4Help must be able to keep track of real time health status and position from registered users' devices}
+\begin{itemize}
+\item \textbf{R1} A user can register to TrackMe's services providing a Fiscal code and a password of their choice
+\item \textbf{D1} Fiscal code uniquely identifies a user of the system
+\item \textbf{R2} After registration, a user can log in by using his/her credentials
+\item \textbf{R3} The system acquires user data only after he/she accepted the data acquisition policy
+\item \textbf{D2} Every user owns at least one device capable of retrieving correct real-time health parameters and location
+\item \textbf{D3} User devices must grant to the system access to the requested data
+\item \textbf{D4} User devices must be continuously connected to the internet
+\end{itemize}
+
+\item \textbf{G2} Data4Help should allow third parties to gather information from a single user or from an anonymous group of users
+\begin{itemize}
+\item \textbf{R4} Third parties can register to Data4Help by providing a VAT code
+\item \textbf{D5} VAT code uniquely identifies a third party in the system
+\item \textbf{R5} The system provides to the registered third parties unique access tokens to use the services
+\item \textbf{R6} The system grants access to a single user data only after his/her confirmation
+\item \textbf{D6} Third parties know the monitored user Fiscal Code
+\item \textit{R7 The system is capable of merging multiple user data and anonymize it}
+\item \textbf{R8} The system shall grant access to merged data only if the number	of individuals	whose data satisfy the request is higher than	 1000.	
+ 	
+  
+
+\end{itemize}
+
+
+\item \textbf{G3} Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced
+\item \textbf{G4} AutomatedSOS must use data coming from Data4Help to monitor the health condition of its users
+\item \textbf{G5} AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain thresholds
+\item \textbf{G6} AutomatedSOS must call an ambulance when it detects a health emergency
+\item \textbf{G7} Track4Run allows a user to become an organizer of a run, so that he/she can create and manage a run
+\item \textbf{G8} Track4Run allows a user to partecipate to an organized run
+\item \textbf{G9} Track4Run allows a spectator to track the position of the partecipants of the run 
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
 While talking, John tells his friend Matt about a new service called Data4Help that helps you keeping track of your health status. Frank, interested in checking his heart rate, downloads the app on his smartphone and fires it up. The app asks him to register to the service by filling a form with his personal information, including his fiscal code and a password of his choice that will be used as credentials for the login. 
@@ -16,9 +55,9 @@ Mary, a Data4Help customer, received for her birthday the new Eppol iClock. Afte
  view of the application appears. Mary taps on the iClock icon and by selecting "Heart Rate" from a dropdown she assigns the tracking of that paramater to her smartwatch. With the same procedure, she assigns to her smartphone the tracking of the "Position" parameter.
 Finally, she clicks on the "Confirm" button and the app saves the settings and returns back to the home page.
 \subsubsection{Scenario 3}
-Steve, a Data4Help customer with diabete, needs to periodically check the glucose levels observed by his medical device connected with the Data4Help application on his smartphone. For doing this, he starts the Data4Help application and when the homepage shows up he  clicks on the "myData" tab. A nice view appears, containing all the information about his monitored health parameters with a lot of colorful diagrams. Steve f ilters out the displayed content by selecting the "Glucose Level" radio button on the top of the page and he changes the information granularity from "Week" to "Day" using a dropdown.  
+Steve, a Data4Help customer with diabete, needs to periodically check the glucose levels observed by his medical device connected with the Data4Help application on his smartphone. For doing this, he starts the Data4Help application and when the homepage shows up he  clicks on the "myData" tab. A nice view appears, containing all the information about his monitored health parameters with a lot of colorful diagrams. Steve filters out the displayed content by selecting the "Glucose Level" radio button on the top of the page and he changes the information granularity from "Week" to "Day" using a dropdown.  
 \subsubsection{Scenario 4}
-Michael Garcia, Boyer Pharmaceutical CEO, heard about the Data4Help service and in agreement with the Administrative Board, he decided to introduce it in the company. He visits  www.trackme.com/data4help and clicks on the "Business Solutions" section in order to register his company as a registered third party of the service. Tp do this, Michael fills in the registration form with all the requested information about the company, including the VAT-number, an e-mail and a password. After that he clicks on the "Submit" button and he immediately receives an e-mail with a link to complete the registration procedure.
+Michael Garcia, Boyer Pharmaceutical CEO, heard about the Data4Help service and in agreement with the Administrative Board, he decided to introduce it in the company. He visits  www.trackme.com/data4help and clicks on the "Business Solutions" section in order to register his company as a registered third party of the service. To do this, Michael fills in the registration form with all the requested information about the company, including the VAT-number, an e-mail and a password. After that he clicks on the "Submit" button and he immediately receives an e-mail with a link to complete the registration procedure.
 \subsubsection{Scenario 5}
 Brian, patient of the Lenox Private Medical Center, was released  yesterday. The clinic, registered to the Data4Help service, decides to monitor his health status to see if the treatment he was under reached the desired results.
 The doctor that was in charge of Brian logs in to the Data4Help reserved page of the clinic. Once logged in, he inserts Brian's fiscal code and selects from a checkbox "Heart Beat" and "Temperature" as the data to monitor. Finally he chooses from a dropdown "3 months" as the observation period.
@@ -35,10 +74,18 @@ William suffers from epilepsy. The attacks are not very frequent but they are so
 
 At first he sets the threshold of the tracked parameters with the help of his doctor and he adds the contacts of his parents. When the wristwatch detects repetitive shaking motion, it automatically sends the user’s bluetooth-connected phone text and call alerts to the designated recipients. Within seconds, family members receive these alerts, which include the date, time and GPS location of the event.
 \subsubsection{Scenario 9}
+Virgin Active is organizing a run for all his customers. Luke, company's event manager, is thinking about using the Track4Run Service to accomplish this task. He logs into the company dedicated web page and he clicks on the Track4Run tab and then on "Create Run".
+
+At this point a configuration frame shows up. Luke starts by filling out the "Basic info" section of the form: he adds the event name, an image, the location and the starting and ending time. Then he goes on by filling out the "Details" section in which he provides a short description of the event and the maximum number of participants. Finally, by clicking on a map, he marks all the checkpoints of the run.
+
+After a quick check, Luke clicks on the "Create" button and a confirmation alert appears saying that the event has been successfully published in the news feed.
 \subsubsection{Scenario 10}
+Chris, runner and Data4Help customer, is looking for a run to join. By looking at the  news feed of Track4Run on his smartphone he sees the event created by Virgin Active. He taps on the event name and the full description of the event shows up. After reading the description and all the details he decides to join the run, hence he clicks on the "Participate" button. A confirmation alert shows up, saying that the event has been added to the attending events.
+\subsubsection{Scenario 11}
+Katy, Chris' wife and Data4Help customer,  wants to go cheer his husband at the run. The day of the run she launches the Data4Help application and in the Track4Run section she taps on the "Ongoing Runs" button. Katy selects the desired run and a nice map with a the GPS position of all the athletes opens up. In order to see the details of the husband she types in a textbox her husband name and press the "Filter" button. After that on the map is shown only the position of his husband followed by the his timing performances, the heart rate and the calories burnt. 
 \subsection{Use Case}
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & User registration \\ \hline
 Actor            & User \\ \hline
@@ -57,12 +104,12 @@ Exceptions       & \begin{enumerate}
 \item There is some invalid data in the form
 \item The email is already used
 \item Terms of service or Privacy policy haven't been checked
-\end{enumerate}\\ all the exceptions take the user back to the registration procedure \\ \hline
+\end{enumerate} All the exceptions take the user back to the registration procedure \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & User log in \\ \hline
 Actor            & User \\ \hline
@@ -76,12 +123,12 @@ Events flow      & \begin{enumerate}
 Exit conditions  & The log in is successful and the user is redirected to home page \\ \hline
 Exceptions       & \begin{enumerate}
 \item Credentials aren't valid
-\end{enumerate} \\ the exceptions are notified to the user and the Log in procedure restart \hline
+\end{enumerate} The exceptions are notified to the user and the Log in procedure restart \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Device Management \\ \hline
 Actor            & User \\ \hline
@@ -101,7 +148,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & MyData \\ \hline
 Actor            & User \\ \hline
@@ -114,12 +161,12 @@ Events flow      & \begin{enumerate}
 Exit conditions  & The user exit the information tab \\ \hline
 Exceptions       & \begin{enumerate}
 \item the system haven't gathered any info yet
-\end{enumerate} \\ the exceptions are notified to the user and the MyData page is shown with the available data \hline
+\end{enumerate} The exceptions are notified to the user and the MyData page is shown with the available data \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Third Party Registration \\ \hline
 Actor            & Third Party \\ \hline
@@ -133,12 +180,12 @@ Exit conditions  & Registration is completed and a notification is sent via e-ma
 Exceptions       & \begin{enumerate}
 \item Company already registered
 \item email already in use
-\end{enumerate}\\ all the exceptions are notified and the procedure goes back to registration \hline
+\end{enumerate} All the exceptions are notified and the procedure goes back to registration \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Third Party Log in \\ \hline
 Actor            & Third Party \\ \hline
@@ -151,12 +198,12 @@ Events flow      & \begin{enumerate}
 Exit conditions  & Log in is successful and the client is redirected to its reserved page  \\ \hline
 Exceptions       & \begin{enumerate}
 \item Credentials aren't valid
-\end{enumerate} \\ the exceptions are notified to the client and the Log in procedure restart  \hline
+\end{enumerate} The exceptions are notified to the client and the Log in procedure restart  \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Single Data Request \\ \hline
 Actor            & Third Party, User \\ \hline
@@ -178,13 +225,14 @@ Exceptions       & \begin{itemize}
 \item The observation period covers a time period in the future
 \end{itemize} This exception launches the subscription procedure
 \begin{enumerate}
+\item No user found that correspond to the search
 \item The user refuse the request
-\end{enumerate} the exception is notified to the third party and the request ends\\  \hline
+\end{enumerate} This exception is notified to the third party and the request ends\\  \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Aggregate Data Request \\ \hline
 Actor            & Third Party, Data4Help (maybe?) \\ \hline
@@ -209,7 +257,7 @@ Exceptions       & \begin{itemize}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Data Subscription \\ \hline
 Actor            & Third party \\ \hline
@@ -225,7 +273,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Anonym? \\ \hline
 Actor            & Data4Help \\ \hline
@@ -243,7 +291,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & AutomatedSOS Subscription \\ \hline
 Actor            & User, AutomatedSOS \\ \hline
@@ -262,7 +310,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Supervisor \\ \hline
 Actor            & AutomatedSOS, User, Third party (emergency) \\ \hline
@@ -282,7 +330,7 @@ Exceptions       & \begin{itemize}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run enroll \\ \hline
 Actor            & User, Track4Run \\ \hline
@@ -295,14 +343,14 @@ Events flow      & \begin{enumerate}
 \end{enumerate} \\ \hline
 Exit conditions  & The user has successfully enrolled to the run and the Tracker started running \\ \hline
 Exceptions       & \begin{enumerate}
-\item The user doen't possess a device able to Track the runner
+\item The user doesn't possess a device able to Track the runner
 \item The user is in a bad shape for a run, medical advice is suggested
 \end{enumerate} This exceptions is notified to the client and the procedure goes on\\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Tracker \\ \hline
 Actor            & Track4Run, User,  \\ \hline
@@ -322,7 +370,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run "unsubscription" \\ \hline
 Actor            & User, Track4Run \\ \hline
@@ -338,7 +386,7 @@ Exceptions       & ? \\ \hline
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Watch Run \\ \hline
 Actor            & User (Spectator), Track4Run, Users (Runners) \\ \hline
@@ -358,7 +406,7 @@ Exceptions       & \begin{enumerate}
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Create a Run \\ \hline
 Actor            & User (Organizer), Track4Run \\ \hline
@@ -375,7 +423,7 @@ Exceptions       & ?\\ \hline
 \end{table}
 
 \begin{table}[]
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run modification/cancellation \\ \hline
 Actor            & User (Organizer), Track4Run \\ \hline
@@ -392,37 +440,17 @@ Exceptions       & On success, notifies all the partecipants about the changes\\
 \end{tabular}
 \end{table}
 
-\begin{table}[]
-\begin{tabular}{|l|l|}
-\hline
-Name             & test \\ \hline
-Actor            & test \\ \hline
-Entry conditions & test \\ \hline
-Events flow      & test \\ \hline
-Exit conditions  & test \\ \hline
-Exceptions       & test\\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[]
-\begin{tabular}{|l|l|}
-\hline
-Name             & test \\ \hline
-Actor            & test \\ \hline
-Entry conditions & test \\ \hline
-Events flow      & test \\ \hline
-Exit conditions  & test \\ \hline
-Exceptions       & test\\ \hline
-\end{tabular}
-\end{table}
-
 \subsection{Performance Requirements}
+5 seconds react time
 \subsection{Design Constraints}
 \subsubsection{Standard compliance}
+GDPR (general data protection regulation), term of service...
 \subsubsection{Hardware limitations}
+
 \subsubsection{Any other constraint}
 \subsection{Software System Attributes}
 \subsubsection{Reliability}
+up 24/7
 \subsubsection{Availability}
 \subsubsection{Security}
 \subsubsection{Maintainability}

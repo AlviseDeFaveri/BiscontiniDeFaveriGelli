@@ -1,0 +1,53 @@
+@startuml
+
+autonumber "<b>[0]:</b>"
+skinparam monochrome  true
+
+actor User
+actor ExternalDataSource
+participant Data4Help
+
+activate User
+User -> ExternalDataSource : synchronizeDataSource()
+activate ExternalDataSource
+ExternalDataSource -> Data4Help : requestSynchronization(source_id, user)
+activate Data4Help
+Data4Help -> Data4Help : authenticateRequest(source_id)
+activate Data4Help #lightgrey
+deactivate Data4Help
+
+Data4Help -> User : askConfirmation(source_id)
+activate User  #lightgrey
+User -->> Data4Help : givePermission()
+deactivate User
+
+Data4Help -> Data4Help : addAsDataSource(source_id, user)
+activate Data4Help  #lightgrey
+deactivate Data4Help
+
+Data4Help -->> ExternalDataSource :  giveAccessToken()
+deactivate Data4Help
+ExternalDataSource -->> User : confirmSynchronization()
+deactivate User
+
+loop
+	ExternalDataSource -> ExternalDataSource : collectData()
+	activate ExternalDataSource  #lightgrey
+	deactivate ExternalDataSource
+	
+	ExternalDataSource -> Data4Help : sendNewData(token, user)
+	activate Data4Help
+	Data4Help -> Data4Help : authenticateDataSource(token, user)
+	activate Data4Help #lightgrey
+	deactivate Data4Help
+	Data4Help -> Data4Help : updateUserData(user)
+	activate Data4Help #lightgrey
+	deactivate Data4Help
+	Data4Help -->> : notifyListeners()
+	Data4Help -->> ExternalDataSource : confirm()
+	deactivate Data4Help
+end
+
+deactivate ExternalDataSource
+
+@enduml

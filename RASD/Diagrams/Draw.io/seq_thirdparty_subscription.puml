@@ -1,0 +1,59 @@
+@startuml
+
+autonumber "<b>[0]:</b>"
+skinparam monochrome  true
+
+actor ThirdParty
+participant Data4Help
+actor User
+
+activate ThirdParty
+
+ThirdParty -> Data4Help : getAccessToken(VAT_code, licence_id)
+activate Data4Help
+Data4Help -->> ThirdParty : grantAccessToken(token)
+deactivate Data4Help
+
+ThirdParty -> Data4Help : subscribeToUserData(user_id, token, callback)
+activate Data4Help
+Data4Help -> Data4Help : authenticateRequest(token)
+activate Data4Help #lightgrey 
+deactivate Data4Help
+
+alt valid token
+	
+	Data4Help -> User : askDataUsagePermission()
+	activate User
+	
+	alt permission granted
+		User -->> Data4Help : grantPermission()
+		Data4Help -> Data4Help : addToListeners(user_id, callback)
+		activate Data4Help #lightgrey 
+		deactivate Data4Help
+		Data4Help -->> ThirdParty : confirm()
+	
+	else permission denied
+		autonumber 7
+		User -->> Data4Help : denyPermission()
+		deactivate User
+		Data4Help -->> ThirdParty : returnError(subscription_denied)
+		
+	end
+	
+else expired token
+	autonumber 4
+	Data4Help -->> ThirdParty : returnError(token_expiry)
+	deactivate Data4Help
+	deactivate ThirdParty
+end
+
+loop 
+autonumber 9
+Data4Help <- : <<new data>>
+Data4Help -> ThirdParty : notifyCallback(user_data)
+
+activate ThirdParty
+deactivate ThirdParty
+end
+
+@enduml

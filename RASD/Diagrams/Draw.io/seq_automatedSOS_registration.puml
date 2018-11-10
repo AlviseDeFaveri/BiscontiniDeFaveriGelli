@@ -1,0 +1,71 @@
+@startuml
+
+autonumber "<b>[0]:</b>"
+skinparam monochrome  true
+
+actor User
+participant App<<AutomatedSOS>>
+participant Data4Help
+activate User
+
+create App
+activate App
+User -> App : <<download>>
+
+App -> User : askDevicePermissions()
+activate User #lightgrey
+User -->> App : grantPermissions()
+deactivate User
+
+App -> User : askCredentials()
+activate User #lightgrey
+User -->> App : fillInCredentials(fiscal_code)
+deactivate User 
+
+App -> Data4Help : getAccessToken()
+activate Data4Help
+Data4Help -->> App : grantAccessToken(token)
+deactivate Data4Help
+
+group Add Device
+
+	App -> Data4Help : requestSynchronization(token, user)
+	activate Data4Help
+	Data4Help -> Data4Help : authenticateRequest(token)
+	activate Data4Help #lightgrey
+	deactivate Data4Help 
+	Data4Help -> User : askPermission()
+	activate User #lightgrey
+	User -->> Data4Help : grantPermission()
+	deactivate User
+	Data4Help -> Data4Help : addAsDataSource(token, user)
+	activate Data4Help  #lightgrey
+	deactivate Data4Help
+	Data4Help -->> App : confirmSynchronization()
+	deactivate Data4Help
+end
+
+group Subscribe to User Data
+	
+	App -> Data4Help : requestDataSubscription(token, user_id, callback)
+	activate Data4Help
+	Data4Help -> Data4Help : authenticateRequest(token)
+	activate Data4Help #lightgrey
+	deactivate Data4Help 
+	Data4Help -> User : askPermission()
+	activate User #lightgrey
+	User -->> Data4Help : grantPermission()
+	deactivate User
+	Data4Help -> Data4Help : addToListeners(user_id, callback)
+	activate Data4Help #lightgrey 
+	deactivate Data4Help
+	Data4Help -->> App : confirmSubscription()
+	deactivate Data4Help
+end
+
+App -> User : confirmActivation()
+deactivate App
+
+deactivate App
+deactivate User
+@enduml

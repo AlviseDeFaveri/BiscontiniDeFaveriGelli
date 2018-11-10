@@ -1,0 +1,51 @@
+@startuml
+
+autonumber "<b>[0]:</b>"
+skinparam monochrome  true
+
+actor ThirdParty
+participant Data4Help
+actor User
+
+activate ThirdParty
+
+ThirdParty -> Data4Help : getAccessToken(VAT_code, licence_id)
+activate Data4Help
+Data4Help -->> ThirdParty : grantAccessToken(token)
+deactivate Data4Help
+
+ThirdParty -> Data4Help : requestUserData(param_list, user_id, token)
+activate Data4Help
+Data4Help -> Data4Help : authenticateRequest(token)
+activate Data4Help #lightgrey 
+deactivate Data4Help
+
+alt valid token
+	
+	Data4Help -> User : askDataUsagePermission()
+	activate User
+	
+	alt permission granted
+		User -->> Data4Help : grantPermission()
+		Data4Help -> Data4Help : <<build response>>
+		activate Data4Help #lightgrey 
+		deactivate Data4Help
+		Data4Help -->> ThirdParty : returnData(data_list)
+	
+	else permission denied
+		autonumber 7
+		User -->> Data4Help : denyPermission()
+		deactivate User
+		Data4Help -->> ThirdParty : returnError(access_denied)
+		
+	end
+	
+else expired token
+	autonumber 4
+	Data4Help -->> ThirdParty : returnError(token_expiry)
+	deactivate Data4Help
+end
+
+deactivate ThirdParty
+
+@enduml

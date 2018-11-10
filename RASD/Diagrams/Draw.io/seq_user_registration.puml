@@ -1,0 +1,55 @@
+@startuml
+
+autonumber "<b>[0]:</b>"
+skinparam monochrome  true
+
+actor User
+participant UI
+participant Data4Help
+activate User
+
+User -> UI : click(register_button)
+activate UI
+UI -->> User : show(registration_form)
+deactivate UI
+
+loop
+
+	User -> UI : fillIn(registration_form)
+	activate UI
+	UI -> UI : verifyInput()
+	activate UI #lightgrey
+	deactivate UI
+	
+	alt success
+		UI -> User  : show(data_treatment_policy)
+		activate User #lightgrey
+		User -->> UI : agree(data_treatment_policy)
+		deactivate User
+		
+		
+		UI -> Data4Help : registerUser(fiscal_code, password)
+		activate Data4Help
+		Data4Help -> Data4Help : checkExistingUsers()
+		activate Data4Help #lightgrey
+		deactivate Data4Help
+		
+		alt user doesn't exists
+			Data4Help -->> UI : confirmUser()
+			
+			UI -->> User : confirmRegistration()
+		else already existing user
+			autonumber 9 
+			Data4Help -->> UI : sendError(error)
+			deactivate Data4Help
+			UI -->> User : showError(user_already_exists)
+		end
+	else any input error
+		autonumber 5
+		UI -->> User : showError(input_error)
+		deactivate UI
+	end 
+end
+
+deactivate User
+@enduml

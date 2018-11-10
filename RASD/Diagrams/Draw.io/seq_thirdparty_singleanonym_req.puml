@@ -1,0 +1,46 @@
+@startuml
+
+autonumber "<b>[0]:</b>"
+skinparam monochrome  true
+
+actor ThirdParty
+participant Data4Help
+
+activate ThirdParty
+
+ThirdParty -> Data4Help : getAccessToken(VAT_code, licence_id)
+activate Data4Help
+Data4Help -->> ThirdParty : grantAccessToken(token)
+deactivate Data4Help
+
+ThirdParty -> Data4Help : reqAnonymData(param_list, filters, token)
+activate Data4Help
+
+Data4Help -> Data4Help : authenticateRequest(token)
+activate Data4Help #lightgrey 
+deactivate Data4Help
+
+alt valid token
+	
+	Data4Help -> Data4Help : buildGroupData(param_list, filters)
+	activate Data4Help #lightgrey 
+	deactivate Data4Help
+	
+	alt anonymization success
+		Data4Help -->> ThirdParty : returnData(data_list)
+	
+	else anonymization fail
+		autonumber 7
+		Data4Help -->> ThirdParty : returnError(anonym_fail)
+		
+	end
+	
+else expired token
+	autonumber 4
+	Data4Help -->> ThirdParty : returnError(token_expiry)
+	deactivate Data4Help
+end
+
+deactivate ThirdParty
+
+@enduml

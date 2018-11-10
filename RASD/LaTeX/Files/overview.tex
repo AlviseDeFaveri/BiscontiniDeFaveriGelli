@@ -1,22 +1,13 @@
-Here you can see how to include an image in your document.
-
-\begin{sidewaysfigure}
-\centering
-\includegraphics[width=\textwidth]{Images/11.png}
-\caption{\label{fig:metamodel}DICE DPIM metamodel.}
-\end{sidewaysfigure}
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{Images/11.png}
-\caption{\label{fig:metamodel2}DICE DPIM metamodel in portrait form.}
-\end{figure}
-
-Here is the command to refer to another element (section, figure, table, ...) in the document: \emph{As discussed in Section~\ref{sect:overview} and as shown in Figure~\ref{fig:metamodel}, ...}. Here is how to introduce a bibliographic citation~\cite{DAM}. Bibliographic references should be included in a \texttt{.bib} file. 
-
-Table generation is a bit complicated in Latex. You will soon become proficient, but to start you can rely on tools or external services. See for instance this \href{https://www.tablesgenerator.com}{https://www.tablesgenerator.com}. 
-
 \subsection{Product perspective}
+The main goal of this system is to collect registered users' data, make them available and offer monitoring services to the end user.
+
+The system is designed to be a set of three subsystems interacting with each other. In particular, Data4Help is the undelying subsystem that collects data from end users and makes it available to third party applications. 
+The other two subsystems are built on top of Data4Help and provide to the user different services: AutomatedSOS offers an automated way of calling an ambulance in case of emergency, while Track4Run gives to the end users a platform to organize and participate to run events.
+
+\begin{itemize}
+\item \textbf{Data4Help:} is the main underlying subsystem, which .
+- AutomatedSOS: is a subsystem built on top of Data4Help that provides the end user with a service to monitor his health status and 
+\end{itemize}
 
 \subsection{Product functions}
 

@@ -533,15 +533,47 @@ The following performance requirements are additionally introduced, although wit
 \end{itemize}
 
 \subsection{Design Constraints}
-\subsubsection{Standard compliance}
-GDPR (general data protection regulation), term of service...
+\subsubsection{Regulatory policies}
+\begin{itemize}
+	\item \textbf{GDPR}: In order to protect the user's privacy and perform a correct data treatment, the system must be developed in compliance with the latest GDPR regulations, giving the maximum attention to the protection and anonymization of the user's data.
+\end{itemize}
 \subsubsection{Hardware limitations}
+The only hardware limitations of our system is present in the devices on which AutomatedSOS and Track4Run applications will be installed. For this reason, the development of the software to be will have to reasonably take in account some common limitations of these devices, such as power consumption and memory size.
 
-\subsubsection{Any other constraint}
+
 \subsection{Software System Attributes}
 \subsubsection{Reliability}
-up 24/7
+
+The system must be available 24/7. Since this requirement is quite demanding, small service breaks will be tolerated. To boost reliability, a RAID architecture that combines multiple disk drives to have data redundancy is suggested. Using a RAID controller we could also expand disks' capacity or substitute them without the risk of losing data or suspending the service for too long. Preventive maintenance is also a good idea to avoid downtimes.
+
 \subsubsection{Availability}
+
+To guarantee a 3-nines (99.9\%) availability degree, a system of redundant servers could be considered. In this way we don't have a single point of failure and if one server fails, another one will be ready to substitute it.
+
 \subsubsection{Security}
+
+Security is a main issue.  At first, to access the functionalities offered by our platform, users have to complete a login phase providing their credentials: fiscal code and password in case of a single user or VAT code and electronic signature for the third parties. These sensitive information should be confidentially stored and encrypted using a proper hash function.
+
+Secondly, the system  continuously collects data on health conditions from the users. Typically this kind of data are also considered sensitive and should be kept secret. Finally, also communications between users and our platform is very important, for this reason the system could be accessed by the customers using secure connection protocols like HTTPS to avoid Man In The Middle attacks. Only the system administrator who is responsible of the Web and Application Server configuration can decide if it is the case to implement them or not.
+
 \subsubsection{Maintainability}
+
+In order to make our software the most maintainable as possible, we will adopt a modular design for our code. In this different components of the system can be modified and additional ones can be introduced in the system with whenever is needed and with a minimal impact on the rest of the system.
+
+Moreover, we will make sure to adopt standard design patterns and coding best practices, so that our code can be easily understood and modified by any future developer.
+
+Finally, the code should be completely and properly documented in order to facilitate the understanding of it. 
+
 \subsubsection{Portability}
+
+During the system installation and setup, we have to consider different factors:
+
+\begin{itemize}
+\item Ease of installation on the central server
+\item Scalability of the platform considering future adjustments without losing the already collected data
+\item Portability of data between different machines, in order to move the system on several more powerful machines in case of necessity
+up 24/7
+\end{itemize}
+
+
+

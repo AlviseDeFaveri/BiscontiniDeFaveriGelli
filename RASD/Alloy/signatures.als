@@ -64,7 +64,7 @@ sig Run {
 	path: one Path,
 	status: one RunStatus,
 	organizers: some RunOrganizer,
-	participants: some RunParticipant,
+	--participants: some RunParticipant,
 	spectators: set RunSpectator
 }
 
@@ -82,11 +82,13 @@ fact vatNumberIsUnique {
 
 /** Dynamic Model **/
 
-pred enrollParticipantToRun [r, r': Run, p: RunParticipant] {
-	r'.participants = r.participants + p
-}
+--pred enrollParticipantToRun [r, r': Run, p: RunParticipant] {
+--	r'.participants = r.participants + p
+--}
 
-pred callAmbulance [a: Ambulance
+--pred callAmbulance [a: Ambulance
 
+pred show {}
+run show for 6
 
 

@@ -1,54 +1,118 @@
-Organize this section according to the rules defined in the project description. 
 \subsection{External Interface Requirements}
+In the following section we list and describe the interfaces that will be provided by the software to external systems and users in order to access its functionalities. This includes user interface mockups as well as a definition of the APIs that will be realized for third party usage.
+
 \subsubsection{User Interface}
-mockup
+A subset of the possible user interfaces that our platform offers to the customers is here provided. As always we divide the interfaces according to the system in examination:
+
+\begin{itemize}
+	\item Data4Help was designed to be mainly a web application. The structure of each page should be intuitive and user friendly, so that even the less experienced user in web browsing can easily use the system.
+	\item AutomatedSOS and Track4Run are designed to be mobile applications. The following mockups show examples of the typical situations in which the user could find himself after installing the application and using it on his smart-phone. Hereunder mockups for other smart-devices are not included, but the user interfaces will be very similar to these ones. 
+\end{itemize}
+
 \subsubsection{Hardware Interfaces}
-none
+Since our system is designed to be a software platform running on any compatible hardware, no proprietary hardware interface is provided.
+
 \subsubsection{Software Interfaces}
-Data acquisition and data retrieval
+The main external software interfaces of our system can be found in Data4Help, which as already explained is the part responsible of connecting data producers to data consumers.
+To achieve this goal, Data4Help exposes two main software interfaces, which can be thought as APIs that are given to the third party applications in order to connect their software to ours.
+
+\begin{itemize}
+	\item \textbf{Data Sharing Interface:} this interface can be used from third party organizations that want to access the user data contained in the system.
+	The interface shall offer four main functionalities: authentication, group data requests, single data requests, subscription requests.
+	
+	Authentication must be done using a trustful way of identifying the organization that wants to register to the system, in order to prevent malicious actors to infiltrate the system. This can be for example an electronic signature connected with the VAT code of the company.
+	
+	Group data and single user data requests are defined by some filters that the third party wants to apply in order to retrieve only the needed data, and when this is possible they will generate a response containing the latest available data from the system.
+	
+	 Finally, subscription to new data can be performed by providing a callback interface, that will then be notified with some specific call whenever some new data is available on the system.
+	 
+	\item \textbf{Data Acquisition Interface:} this interface is provided to the applications and hardware devices that collect data from the user, and gives the possibility to add this kind of information to the user's data set in the system.
+	
+	As for third parties, authentication is necessary in this case too. This can be provided by the data source using the user's Data4Help credentials, so that the systems knows which user is adding that data source.
+	
+	Once authenticated, the data source is provided with an interface to send data streams to the Data4Help system, that will collect and store them safely. 
+\end{itemize}
+
 \subsubsection{Communication Interfaces}
-REST API, TCP/IP, HTTPS
+As communication interfaces, this system will use the commonly available protocols to access the internet and to make remote calls to software interfaces of external and internal systems.
+
 \subsection{Functional Requirements}
-\textbf{GG} Data4Help allows the user to examine all his/her collected data
 
 \textbf{[G1] Data4Help must be able to keep track of real time health status and position from registered users' devices}
 \begin{itemize}
-\item \textbf{R1} A user can register to TrackMe's services providing a Fiscal code and a password of their choice
-\item \textbf{D1} Fiscal code uniquely identifies a user of the system
-\item \textbf{R2} After registration, a user can log in by using his/her credentials
-\item \textbf{R3} The system acquires user data only after he/she accepted the data acquisition policy
-\item \textbf{D2} Every user owns at least one device capable of retrieving correct real-time health parameters and location
-\item \textbf{D3} User devices must grant to the system access to the requested data
-\item \textbf{D4} User devices must be continuously connected to the internet
+	\item \textbf{[R1]} A user can register to TrackMe's services providing a Fiscal code and a password of their choice
+	\item \textbf{[D1]} Fiscal code uniquely identifies a user of the system
+	\item \textbf{[R2]} After registration, a user can log in by using his/her credentials
+	\item \textbf{[R3]} The system acquires user data only after he/she accepted the data acquisition policy
+	\item \textbf{[R4]} The system can acquire data from external applications that register themselves as data sources of a user.
+	\item \textbf{[D2]} Every user owns at least one device capable of retrieving correct real-time health parameters and location
+	\item \textbf{[D3]} User devices must grant to the system access to the requested data
+	\item \textbf{[D4]} User devices must be continuously connected to the internet
 \end{itemize}
-
-\textbf{G2} Data4Help should allow third parties to gather information from a single user or from an anonymous group of users
+\\
+\textbf{[G2] Data4Help should allow third parties to gather information from a single user or from an anonymous group of users}
 \begin{itemize}
-\item \textbf{R4} Third parties can register to Data4Help by providing a VAT code
-\item \textbf{D5} VAT code uniquely identifies a third party in the system
-\item \textbf{R5} The system provides to the registered third parties unique access tokens to use the services
-\item \textbf{R6} The system grants access to a single user data only after his/her confirmation
-\item \textbf{D6} Third parties know the monitored user Fiscal Code
-\item \textit{R7 The system is capable of merging multiple user data and anonymize it}
-\item \textbf{R8} The system shall grant access to merged data only if the number	of individuals	whose data satisfy the request is higher than	 1000.	
- 	
-  
-
+	\item \textbf{[R4]} Third parties can register to Data4Help by providing a VAT code
+	\item \textbf{[D5]} VAT code uniquely identifies a third party in the system
+	\item \textbf{[R5]} The system provides to the registered third parties unique access tokens to use the services
+	\item \textbf{[R6]} The system grants access to a single user data only after his/her confirmation
+	\item \textbf{[D6]} Third parties know the monitored user Fiscal Code
+	\item \textit{[R7] The system is capable of merging multiple user data and anonymize it}
+	\item \textbf{[R8]} The system shall grant access to merged data only if the number	of individuals	whose data satisfy the request is higher than	 1000
 \end{itemize}
+\\
+\textbf{[G3] Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced}
 
-
-\textbf{G3} Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced
 \begin{itemize}
-\item \textbf{G4} AutomatedSOS must use data coming from Data4Help to monitor the health condition of its users
-\item \textbf{G5} AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain thresholds
-\item \textbf{G6} AutomatedSOS must call an ambulance when it detects a health emergency
-\item \textbf{G7} Track4Run allows a user to become an organizer of a run, so that he/she can create and manage a run
-\item \textbf{G8} Track4Run allows a user to partecipate to an organized run
-\item \textbf{G9} Track4Run allows a spectator to track the position of the partecipants of the run 
-
+	\item \textbf{[R9]} The system must store information about third parties' data subscriptions
+	\item \textbf{[R10]} The system asks to the third parties who want to subscribe to new data to provide a callback interface
+	\item \textbf{[R11]} The system must notify every observing third party through their callbacks whenever an observed data changes.
+	\item \textbf{[R12]}
 \end{itemize}
-
-
+\\
+\textbf{[G4] AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain threshold}
+\begin{itemize}
+	\item \textbf{[R12]} AutomatedSOS users must be signed in with a Data4Help account
+	\item \textbf{[R13]} AutomatedSOS can use data coming from Data4Help to monitor the health condition of its users
+	\item \textbf{[R14]} AutomatedSOS, when possible, uses data coming directly from the device sensors.
+	\item \textbf{[R15]} When activated, AutomatedSOS provides some default values for parameters thresholds
+	\item \textbf{[R16]} AutomatedSOS gives the user the possibility to set his/her own threshold 
+	\item \textbf{[D7]} AutomatedSOS has access to parameters that can be useful for identifying an emergency status
+\end{itemize}
+\\
+\textbf{[G5] AutomatedSOS must notify the user and call an ambulance when it detects a health emergency}
+\begin{itemize}
+	\item \textbf{[D8]} There exists an API through which AutomatedSOS can pass to an ambulance information about the identity, the location and the vital parameters of the person in trouble
+	\item \textbf{[R17]} The system must notify the user before calling the ambulance
+	\item \textbf{[R18]} The system gives the possibility to abort the operation within 5 seconds
+	\item \textbf{[R19]} The system automatically calls the ambulance if the operation is not aborted
+\end{itemize}
+\\
+\textbf{[G6] Track4Run allows an organizer to create and manage a run.}
+\begin{itemize}
+	\item \textbf{[R20]} Track4Run users must be signed in with a Data4Help account
+	\item \textbf{[R21]} Track4Run allows organizers to create a "run event" providing the track, the date and a starting and ending time
+	\item \textbf{[R22]}  Track4Run allows organizers to modify the details of the created event
+	\item \textbf{[R23]} Track4Run allows organizers to delete his created runs
+	\item \textbf{[R24]} Track4Run gives the possibility to the organizers to extend editing permissions of an event to other users (co-organizers) 
+	\item \textbf{[R25]} Track4Run can show to an organizer a list of his past, ongoing and future events
+\end{itemize}
+\\
+\textbf{[G7] Track4Run allows a user to partecipate to an organized run}
+\begin{itemize}
+	\item \textbf{[D9]} Track4Run athlete wears the monitoring device during the whole run
+	\item \textbf{[R27]} Track4Run gives the user the possibility to look up for future organized runs and join them
+	\item \textbf{[R28]} Track4Run gives the user the possibility to unsubscribe from a previously joined run at any moment
+	\item \textbf{[R29]} Track4Run must keep track of the position of every participant of the run from the start until the end of the event
+\end{itemize}
+\\
+\textbf{[G8] Track4Run allows a spectator to track the position of the partecipants of the run}
+\begin{itemize}
+	\item \textbf{[R30]} Track4Run gives the spectator the possibility to look up for ongoing runs and select the one to follow
+	\item \textbf{[R31]} Track4Run shows to the spectator the position of all the participants of the selected run on a map
+	\item \textbf{[D10]} There is system providing an API to visualize GPS data on a map.
+\end{itemize}
+ 
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
 While talking, John tells his friend Matt about a new service called Data4Help that helps you keeping track of your health status. Frank, interested in checking his heart rate, downloads the app on his smartphone and fires it up. The app asks him to register to the service by filling a form with his personal information, including his fiscal code and a password of his choice that will be used as credentials for the login. 
@@ -89,8 +153,9 @@ Chris, runner and Data4Help customer, is looking for a run to join. By looking a
 \subsubsection{Scenario 11}
 Katy, Chris' wife and Data4Help customer,  wants to go cheer his husband at the run. The day of the run she launches the Data4Help application and in the Track4Run section she taps on the "Ongoing Runs" button. Katy selects the desired run and a nice map with a the GPS position of all the athletes opens up. In order to see the details of the husband she types in a textbox her husband name and press the "Filter" button. After that on the map is shown only the position of his husband followed by the his timing performances, the heart rate and the calories burnt.
  
+
 \subsection{Use Case}
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & User registration \\ \hline
@@ -114,7 +179,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & User Login \\ \hline
@@ -133,7 +198,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Add Data Source \\ \hline
@@ -152,7 +217,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Data Sources Management \\ \hline
@@ -173,7 +238,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Third Party Registration \\ \hline
@@ -192,7 +257,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Third Party Login \\ \hline
@@ -210,7 +275,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & One Shot Single Data Request \\ \hline
@@ -265,7 +330,7 @@ Exceptions \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & One Shot Group Data Request \\ \hline
@@ -291,7 +356,7 @@ Exceptions
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Subscription Group Data Request \\ \hline
@@ -318,7 +383,7 @@ Exceptions
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & AutomatedSOS Login \\ \hline
@@ -336,7 +401,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Monitoring Service \\ \hline
@@ -358,7 +423,7 @@ Exceptions       &  \begin{itemize}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Threshold Settings \\ \hline
@@ -374,7 +439,7 @@ Exceptions       &  \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & MyData \\ \hline
@@ -392,7 +457,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Create a Run \\ \hline
@@ -428,7 +493,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run "unsubscription" \\ \hline
@@ -443,7 +508,7 @@ Exceptions       & \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Watch Run \\ \hline
@@ -462,7 +527,7 @@ Exceptions       & \begin{enumerate}
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run modification \\ \hline
@@ -479,7 +544,7 @@ Exceptions       &\\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[h!]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 Name             & Run deletion \\ \hline
@@ -494,18 +559,70 @@ Exceptions       &\\ \hline
 \end{tabular}
 \end{table}
 
+\newpage
+\newpage
 \subsection{Performance Requirements}
-5 seconds react time
-\subsection{Design Constraints}
-\subsubsection{Standard compliance}
-GDPR (general data protection regulation), term of service...
-\subsubsection{Hardware limitations}
+In general, the main performance requirements for our system concern the time needed to process data and fulfill data requests.
 
-\subsubsection{Any other constraint}
+In particular, the system should meet the following strong requirement:
+
+\begin{itemize}
+	\item \textbf{AutomatedSOS Emergency Response}
+	The system must call an ambulance within \textbf{5 seconds} from when a parameter exceeds a threshold. This time shall take into account the time needed for the AutomatedSOS monitoring system to process new incoming data and detect the emergency, the Data4Help system to send the new data to AutomatedSOS and the average delay introduced from the communication interfaces.
+\end{itemize}
+
+The following performance requirements are additionally introduced, although with a minor importance compared to the previous one. They should anyway be met from the software, in order for it to be usable and efficient:
+
+\begin{itemize}
+	\item \textbf{Data4Help Single Data Request Response}
+	After a single data request is accepted, the system should send the requested data to the third party within 3 seconds. 
+	
+	\item \textbf{Data4Help Data Subscription Delay }
+	When a new data is received from the system, the subscribed third parties should be notified of the new data within 2 seconds.
+\end{itemize}
+
+\subsection{Design Constraints}
+\subsubsection{Regulatory policies}
+\begin{itemize}
+	\item \textbf{GDPR}: In order to protect the user's privacy and perform a correct data treatment, the system must be developed in compliance with the latest GDPR regulations, giving the maximum attention to the protection and anonymization of the user's data.
+\end{itemize}
+\subsubsection{Hardware limitations}
+The only hardware limitations of our system is present in the devices on which AutomatedSOS and Track4Run applications will be installed. For this reason, the development of the software to be will have to reasonably take in account some common limitations of these devices, such as power consumption and memory size.
+
+
 \subsection{Software System Attributes}
 \subsubsection{Reliability}
-up 24/7
+
+The system must be available 24/7. Since this requirement is quite demanding, small service breaks will be tolerated. To boost reliability, a RAID architecture that combines multiple disk drives to have data redundancy is suggested. Using a RAID controller we could also expand disks' capacity or substitute them without the risk of losing data or suspending the service for too long. Preventive maintenance is also a good idea to avoid downtimes.
+
 \subsubsection{Availability}
+
+To guarantee a 3-nines (99.9\%) availability degree, a system of redundant servers could be considered. In this way we don't have a single point of failure and if one server fails, another one will be ready to substitute it.
+
 \subsubsection{Security}
+
+Security is a main issue.  At first, to access the functionalities offered by our platform, users have to complete a login phase providing their credentials: fiscal code and password in case of a single user or VAT code and electronic signature for the third parties. These sensitive information should be confidentially stored and encrypted using a proper hash function.
+
+Secondly, the system  continuously collects data on health conditions from the users. Typically this kind of data are also considered sensitive and should be kept secret. Finally, also communications between users and our platform is very important, for this reason the system could be accessed by the customers using secure connection protocols like HTTPS to avoid Man In The Middle attacks. Only the system administrator who is responsible of the Web and Application Server configuration can decide if it is the case to implement them or not.
+
 \subsubsection{Maintainability}
+
+In order to make our software the most maintainable as possible, we will adopt a modular design for our code. In this different components of the system can be modified and additional ones can be introduced in the system with whenever is needed and with a minimal impact on the rest of the system.
+
+Moreover, we will make sure to adopt standard design patterns and coding best practices, so that our code can be easily understood and modified by any future developer.
+
+Finally, the code should be completely and properly documented in order to facilitate the understanding of it. 
+
 \subsubsection{Portability}
+
+During the system installation and setup, we have to consider different factors:
+
+\begin{itemize}
+\item Ease of installation on the central server
+\item Scalability of the platform considering future adjustments without losing the already collected data
+\item Portability of data between different machines, in order to move the system on several more powerful machines in case of necessity
+up 24/7
+\end{itemize}
+
+
+

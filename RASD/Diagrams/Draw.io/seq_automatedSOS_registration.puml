@@ -5,6 +5,7 @@ skinparam monochrome  true
 
 actor User
 participant App<<AutomatedSOS>>
+participant MonitoringService<<AutomatedSOS>>
 participant Data4Help
 activate User
 
@@ -12,42 +13,32 @@ create App
 activate App
 User -> App : <<download>>
 
-App -> User : askDevicePermissions()
+App -> User : askDeviceAccessPermissions()
 activate User #lightgrey
 User -->> App : grantPermissions()
 deactivate User
 
 App -> User : askCredentials()
 activate User #lightgrey
-User -->> App : fillInCredentials(fiscal_code)
+User -->> App : provideCredentials(D4H_credentials)
 deactivate User 
 
-App -> Data4Help : getAccessToken()
-activate Data4Help
-Data4Help -->> App : grantAccessToken(token)
-deactivate Data4Help
 
-group Add Device
+App -> MonitoringService : addUser(D4H_credentials)
+activate MonitoringService
+MonitoringService -> MonitoringService: addUserToSystem()
+activate MonitoringService  #lightgrey
+deactivate MonitoringService
 
-	App -> Data4Help : requestSynchronization(token, user)
+
+group Subscribe to User Data 
+	MonitoringService -> Data4Help : getAccessToken(D4H_credentials)
 	activate Data4Help
-	Data4Help -> Data4Help : authenticateRequest(token)
-	activate Data4Help #lightgrey
-	deactivate Data4Help 
-	Data4Help -> User : askPermission()
-	activate User #lightgrey
-	User -->> Data4Help : grantPermission()
-	deactivate User
-	Data4Help -> Data4Help : addAsDataSource(token, user)
-	activate Data4Help  #lightgrey
-	deactivate Data4Help
-	Data4Help -->> App : confirmSynchronization()
-	deactivate Data4Help
-end
-
-group Subscribe to User Data
 	
-	App -> Data4Help : requestDataSubscription(token, user_id, callback)
+alt Authenication OK	
+	Data4Help -->> MonitoringService : grantAccessToken(token)
+	deactivate Data4Help
+	MonitoringService -> Data4Help : requestDataSubscription(token, user_id, callback)
 	activate Data4Help
 	Data4Help -> Data4Help : authenticateRequest(token)
 	activate Data4Help #lightgrey
@@ -59,12 +50,25 @@ group Subscribe to User Data
 	Data4Help -> Data4Help : addToListeners(user_id, callback)
 	activate Data4Help #lightgrey 
 	deactivate Data4Help
-	Data4Help -->> App : confirmSubscription()
+	Data4Help -->> MonitoringService : confirmSubscription()
+	
+	MonitoringService -->> App : confirmUser()
+	
+	App -> User : confirmActivation()
+	
+else Authentication Error
+	autonumber 9
+	Data4Help -->> MonitoringService : denyAccess()
 	deactivate Data4Help
-end
 
-App -> User : confirmActivation()
-deactivate App
+	MonitoringService -->> App : notifyError(synch_error)
+	deactivate MonitoringService
+	
+	App -->> User : notify_error(synch_error)
+	deactivate App
+	deactivate User
+end
+end
 
 deactivate App
 deactivate User

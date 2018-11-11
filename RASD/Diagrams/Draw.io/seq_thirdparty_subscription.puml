@@ -31,9 +31,17 @@ alt valid token
 		activate Data4Help #lightgrey 
 		deactivate Data4Help
 		Data4Help -->> ThirdParty : confirm()
+		
+		loop 
+	Data4Help <- : <<new data>>
+	Data4Help -> ThirdParty : notifyCallback(user_data)
+	
+	activate ThirdParty
+	deactivate ThirdParty
+	end
 	
 	else permission denied
-		autonumber 7
+		autonumber 6
 		User -->> Data4Help : denyPermission()
 		deactivate User
 		Data4Help -->> ThirdParty : returnError(subscription_denied)
@@ -41,19 +49,10 @@ alt valid token
 	end
 	
 else expired token
-	autonumber 4
+	autonumber 5
 	Data4Help -->> ThirdParty : returnError(token_expiry)
 	deactivate Data4Help
 	deactivate ThirdParty
-end
-
-loop 
-autonumber 9
-Data4Help <- : <<new data>>
-Data4Help -> ThirdParty : notifyCallback(user_data)
-
-activate ThirdParty
-deactivate ThirdParty
 end
 
 @enduml

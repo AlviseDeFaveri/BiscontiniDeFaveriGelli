@@ -1,13 +1,41 @@
-Organize this section according to the rules defined in the project description. 
 \subsection{External Interface Requirements}
+In the following section we list and describe the interfaces that will be provided by the software to external systems and users in order to access its functionalities. This includes user interface mockups as well as a definition of the APIs that will be realized for third party usage.
+
 \subsubsection{User Interface}
-mockup
+A subset of the possible user interfaces that our platform offers to the customers is here provided. As always we divide the interfaces according to the system in examination:
+
+\begin{itemize}
+	\item Data4Help was designed to be mainly a web application. The structure of each page should be intuitive and user friendly, so that even the less experienced user in web browsing can easily use the system.
+	\item AutomatedSOS and Track4Run are designed to be mobile applications. The following mockups show examples of the typical situations in which the user could find himself after installing the application and using it on his smart-phone. Hereunder mockups for other smart-devices are not included, but the user interfaces will be very similar to these ones. 
+\end{itemize}
+
 \subsubsection{Hardware Interfaces}
-none
+Since our system is designed to be a software platform running on any compatible hardware, no proprietary hardware interface is provided.
+
 \subsubsection{Software Interfaces}
-Data acquisition and data retrieval
+The main external software interfaces of our system can be found in Data4Help, which as already explained is the part responsible of connecting data producers to data consumers.
+To achieve this goal, Data4Help exposes two main software interfaces, which can be thought as APIs that are given to the third party applications in order to connect their software to ours.
+
+\begin{itemize}
+	\item \textbf{Data Sharing Interface:} this interface can be used from third party organizations that want to access the user data contained in the system.
+	The interface shall offer four main functionalities: authentication, group data requests, single data requests, subscription requests.
+	
+	Authentication must be done using a trustful way of identifying the organization that wants to register to the system, in order to prevent malicious actors to infiltrate the system. This can be for example an electronic signature connected with the VAT code of the company.
+	
+	Group data and single user data requests are defined by some filters that the third party wants to apply in order to retrieve only the needed data, and when this is possible they will generate a response containing the latest available data from the system.
+	
+	 Finally, subscription to new data can be performed by providing a callback interface, that will then be notified with some specific call whenever some new data is available on the system.
+	 
+	\item \textbf{Data Acquisition Interface:} this interface is provided to the applications and hardware devices that collect data from the user, and gives the possibility to add this kind of information to the user's data set in the system.
+	
+	As for third parties, authentication is necessary in this case too. This can be provided by the data source using the user's Data4Help credentials, so that the systems knows which user is adding that data source.
+	
+	Once authenticated, the data source is provided with an interface to send data streams to the Data4Help system, that will collect and store them safely. 
+\end{itemize}
+
 \subsubsection{Communication Interfaces}
-REST API, TCP/IP, HTTPS
+As communication interfaces, this system will use the commonly available protocols to access the internet and to make remote calls to software interfaces of external and internal systems.
+
 \subsection{Functional Requirements}
 
 \textbf{[G1] Data4Help must be able to keep track of real time health status and position from registered users' devices}

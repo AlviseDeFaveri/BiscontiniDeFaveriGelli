@@ -1,11 +1,17 @@
-\usepackage[dvipsnames]{xcolor}
-\usepackage{listings}
-\usepackage{alloy-style}
 \input{commandsFile}
 %\documentclass[12pt]{article}
 \usepackage[english]{babel}
 \usepackage{natbib}
 \usepackage{url}
+
+\usepackage[section]{placeins}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{alloy-style}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+
 %\usepackage[utf8x]{inputenc}
 %\usepackage{amsmath}
 %\usepackage{graphicx}
@@ -16,7 +22,7 @@
 %\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
 
 \title{TrackMe Requirement Analysis and Specification Document}								% Title
-\author{Andrea Biscontini, Marco Gelli, Alvise De Faveri}								% Author
+\author{Andrea Biscontini, Marco Gelli, Alvise de' Faveri Tron}								% Author
 \date{11 Nov 2018}											% Date
 
 \makeatletter
@@ -107,79 +113,8 @@
 \label{sect:requirements}
 \input{Files/requirements}
 
-
-
 %------------------------------------------------------------------------------------------------------------------------------------------------
 \clearpage
-
-
-\newpage
-\subsection{Performance Requirements}
-In general, the main performance requirements for our system concern the time needed to process data and fulfill data requests.
-
-In particular, the system should meet the following strong requirement:
-
-\begin{itemize}
-	\item \textbf{AutomatedSOS Emergency Response}
-	The system must call an ambulance within \textbf{5 seconds} from when a parameter exceeds a threshold. This time shall take into account the time needed for the AutomatedSOS monitoring system to process new incoming data and detect the emergency, the Data4Help system to send the new data to AutomatedSOS and the average delay introduced from the communication interfaces.
-\end{itemize}
-
-The following performance requirements are additionally introduced, although with a minor importance compared to the previous one. They should anyway be met from the software, in order for it to be usable and efficient:
-
-\begin{itemize}
-	\item \textbf{Data4Help Single Data Request Response}
-	After a single data request is accepted, the system should send the requested data to the third party within 3 seconds. 
-	
-	\item \textbf{Data4Help Data Subscription Delay }
-	When a new data is received from the system, the subscribed third parties should be notified of the new data within 2 seconds.
-\end{itemize}
-
-\subsection{Design Constraints}
-\subsubsection{Regulatory policies}
-\begin{itemize}
-	\item \textbf{GDPR}: In order to protect the user's privacy and perform a correct data treatment, the system must be developed in compliance with the latest GDPR regulations, giving the maximum attention to the protection and anonymization of the user's data.
-\end{itemize}
-\subsubsection{Hardware limitations}
-The only hardware limitations of our system is present in the devices on which AutomatedSOS and Track4Run applications will be installed. For this reason, the development of the software to be will have to reasonably take in account some common limitations of these devices, such as power consumption and memory size.
-
-
-\subsection{Software System Attributes}
-\subsubsection{Reliability}
-
-The system must be available 24/7. Since this requirement is quite demanding, small service breaks will be tolerated. To boost reliability, a RAID architecture that combines multiple disk drives to have data redundancy is suggested. Using a RAID controller we could also expand disks' capacity or substitute them without the risk of losing data or suspending the service for too long. Preventive maintenance is also a good idea to avoid downtimes.
-
-\subsubsection{Availability}
-
-To guarantee a 3-nines (99.9\%) availability degree, a system of redundant servers could be considered. In this way we don't have a single point of failure and if one server fails, another one will be ready to substitute it.
-
-\subsubsection{Security}
-
-Security is a main issue.  At first, to access the functionalities offered by our platform, users have to complete a login phase providing their credentials: fiscal code and password in case of a single user or VAT code and electronic signature for the third parties. These sensitive information should be confidentially stored and encrypted using a proper hash function.
-
-Secondly, the system  continuously collects data on health conditions from the users. Typically this kind of data are also considered sensitive and should be kept secret. Finally, also communications between users and our platform is very important, for this reason the system could be accessed by the customers using secure connection protocols like HTTPS to avoid Man In The Middle attacks. Only the system administrator who is responsible of the Web and Application Server configuration can decide if it is the case to implement them or not.
-
-\subsubsection{Maintainability}
-
-In order to make our software the most maintainable as possible, we will adopt a modular design for our code. In this different components of the system can be modified and additional ones can be introduced in the system with whenever is needed and with a minimal impact on the rest of the system.
-
-Moreover, we will make sure to adopt standard design patterns and coding best practices, so that our code can be easily understood and modified by any future developer.
-
-Finally, the code should be completely and properly documented in order to facilitate the understanding of it. 
-
-\subsubsection{Portability}
-
-During the system installation and setup, we have to consider different factors:
-
-\begin{itemize}
-	\item Ease of installation on the central server
-	\item Scalability of the platform considering future adjustments without losing the already collected data
-	\item Portability of data between different machines, in order to move the system on several more powerful machines in case of necessity
-	up 24/7
-\end{itemize}
-
-
-
-
 {\color{Blue}{\section{Formal Analysis Using Alloy}}}
 \label{sect:alloy}
 \input{Files/alloy}
@@ -189,12 +124,6 @@ During the system installation and setup, we have to consider different factors:
 {\color{Blue}{\section{Effort Spent}}}
 \label{sect:effort}
 \input{Files/effort}
-
-%------------------------------------------------------------------------------------------------------------------------------------------------
-\clearpage
-\input{Files/mockups.tex}
-{\color{Blue}{\section{Appendix A}}}
-\label{sect:Appendix A}
 
 
 

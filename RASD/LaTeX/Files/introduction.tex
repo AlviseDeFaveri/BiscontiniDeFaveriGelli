@@ -1,31 +1,52 @@
-prima dei sottocapitoli
 \subsection{Purpose}
-This document represent the Requirement Analysis and Specification Document of the Data4Help systemz. Here it's described the general purpose of the system, the functional and non-functional requirements that it must respect and the assumption through which we achieve all it's goal. This document is addressed to all the stakeholder of this system, which means final clients but also management, developer, testers and more.\\
-The Data4Help system is composed by an user side smartphone Application and a web based query service for the third parties. The user-side App has the task to collect data from all the devices connected to the user's smartphone and send them to the TrackMe database. The web service is instead used by third parties to submit data request to TrackMe and, if they are successful, receive the most recent data collected on the proprietary databases.
-AutomatedSOS is instead an user-side integration for the Data4Help service. Registered users' real time data are here monitored and, if there is any signal of possible health problems, local emergency numbers are called and an ambulance is called to intervene at the customer location.
-Track4Run isanother ananotheranotheranotheranotherother system built upon Data4Help. Here users can become run organizers, enroll in scheduled runs and spectate live runs through a map with live GPS ranotheranotheranotherunners position.
+This document is the Requirement Analysis and Specification Document of the Data4Help system and the two subsystems working on top of it: AutomatedSOS and Track4Run. In this document we will describe the general purpose of the system, the main goals that it has to achieve, the functional and non-functional requirements that have to be met and the domain assumptions and constraints that have been identified. 
+
+This document is addressed to all the stakeholders of the system: customers (end users or third parties), system analysts, project managers and developers. Here a brief overview of the product will be given.
+
+Data management is a very popular topic nowadays. It has applications in multiple fields and it may result in many benefits when properly employed: for example medical research, healthcare and the fitness world have greatly benefited from an extensive use of personal data in the past years. On the other hand, data treatment and security has been a increasingly important concern among our society, which resulted in a more strict and aware regulatory policies.
+
+Data4Help is a system designed to address the issue of collecting user data from different sources like smart devices or external applications and ensure a secure and reliable way to share them with interested companies. Additionally, some other functionalities are added to the system by AutomatedSOS and Track4Run. 
+
+The main purpose of AutomatedSOS is to offer to Data4Help users an automated solution to monitor their health status and call an ambulance that will rescue them in case of emergency. This is done by exploiting the data collected by the Data4Help system.  
+
+Finally, Track4Run has the objective to solve the organizational problems that arise in the management of sport events, in particular running events that in our days are becoming more and more popular, even among amateurs. In fact, this system gives to each user the possibility to organize and participate to runs, providing also the possibility, for those who don't want to run, to watch the participants from the sideline.
 \subsection{Scope}
 \subsubsection{Description of the given problem}
-As stated in the above section, Data4Help main goal is to collect user's data and made them available to third parties, all while guaranteeing the user privacy and consensus in personal data processing. To collect these data, the system needs to connect to users' smartwearables and download all the relevant produced data to TrackMe proprietary servers. Then this data are processed by TrackMe and whenever a request for data arrives from the third parties, if the request is successful, they're made available to them. Third parties could also desire to look for future changes in the data they requested, so an auxiliary subscription to new data is also made available at request time. Other than that, to simplify the data request procedure, this has been divided in two types of request: single user data request, that is forwarded directly to the individual that can accept or refuse it, and request for anonymized data of groups of individual, that is handled by TrackMe and it's always successful if there is the possibility to render the data anonym.
-On top of the Data4Help system, that is used mainly by third party as a data retrieving service, there are AutomatedSOS and Track4Run. These service are instead to be used by an user of Data4Help. AutomatedSOS means is to help elderly or non-healty people to monitor their health status and intervene in the case of an emergency. In fact the goal of AutomatedSOS is to be very reactive (maximum 5 seconds) whenever a possible health problem is signaled and to immediately call emergency number and an ambulance for the location of the client.
-Track4Run is instead a system designed for athletes and runners in which it's possible to organize, partecipate and spectate organized running competitions. Here any user can become the organizer of a run by creating one. The run creation procedure here is made really simple for the organizer, who needs only to insert the needed infos and select a route for the run on the map. When a run is created, every other user can enroll to it. To give an even better service, there is also the possibility to spectate a run on the App, which means follow every runner's position on a live GPS map.
 
-The whole system ....
-\subsubsection{Current System}
+As stated in the above section, Data4Help main goal is to collect user data and make them available to third parties, all while guaranteeing the user privacy and consensus in personal data processing. 
+
+To collect these data, the system needs to connect to users' smart devices and wearables so that they can send the retrieved information to the TrackMe proprietary system. This data are then processed by Data4Help and made available for third party organizations under certain conditions.
+
+In particular, we can divide requests in two different types: single user data requests, that are forwarded directly to the individual, who can accept or refuse them, and data requests for groups of individuals, that are handled by Data4Help and are carried out only if there is the possibility to properly anonymize the data. Third parties could also desire to look for future changes in the data they requested: for this reason an auxiliary subscription to new data is also provided.
+
+Moving to AutomatedSOS, it can be used to help elderly or sick people to monitor their health conditions and intervene in the case of an emergency. In fact, the goal of AutomatedSOS is to be very reactive (maximum 5 seconds) in detecting possible health problems and immediately call an ambulance to the user location.
+
+Instead, Track4Run is designed for being used by a multitude of different users: any user can become the organizer of a run by creating one. The run creation procedure is made really simple: the user just needs to insert the information related to the event and select a route for the run on the map. When a run is created, every other user can enroll to it. To give an even better service, there is also the possibility to follow every runner's position on a live GPS map.
+
 \subsubsection{Goals}
 \begin{itemize}
-\item \textbf{G1} Data4Help must be able to keep track of real time health status and position from registered users
-\item \textbf{G2} Data4Help should allow third parties to gather information from a single user or from an anonymous group of users
-\item \textbf{G3} Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced
-\item \textbf{G4} AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain thresholds
-\item \textbf{G5} AutomatedSOS must call an ambulance when it detects a health emergency
-\item \textbf{G7} Track4Run allows a user to become an organizer of a run, so that he/she can create and manage a run
-\item \textbf{G8} Track4Run allows a user to partecipate to an organized run
-\item \textbf{G9} Track4Run allows a spectator to track the position of the partecipants of a run 
+\item \textbf{[G1]} Data4Help must be able to keep track of real time health status and position from registered users
+\item \textbf{[G2]} Data4Help should allow third parties to gather information from a single user or from an anonymous group of users
+\item \textbf{[G3]} Data4Help should allow third parties to subscribe to new data and receive them as soon as they're produced
+\item \textbf{[G4]} AutomatedSOS should be able to identify an health emergency when the user data are below/exceeding a certain thresholds
+\item \textbf{[G5]} AutomatedSOS must call an ambulance when it detects a health emergency
+\item \textbf{[G7]} Track4Run must allow a user to create and manage running events
+\item \textbf{[G8]} Track4Run must allow a user to participate to an organized run
+\item \textbf{[G9]} Track4Run must allow a spectator to track the position of the participants of an ongoing run 
 \end{itemize}
 \subsection{Definitions, Acronyms, Abbreviations}
 \subsubsection{Definitions}
-third party, data source, synchronization, parameter, threshold,
+
+\begin{itemize}
+\item \textbf{Third Party}: Any system that is not Data4Help that wants to access to Data4Help user's data
+\item \textbf{Data Request}: The action that third parties can make to retrieve users data
+\item \textbf{Notification}: An email, SMS or any other way in which a user can be alerted of any event of the system
+\item \textbf{Data Source}: An external device or application that can collect data from the user
+\item \textbf{Synchronization}: The procedure to connect a Data Source with the Data4Help system
+\item \textbf{Parameter}: A generic physical or health information regarding the user that can be collected from a device
+\item \textbf{Threshold}: A value defining when a certain parameter is out of the normal range
+\item \textbf{Emergency Status}: A status in which one or more parameters of an AutomatedSOS user exceeded their thresholds
+\end{itemize}
 
 \subsubsection{Acronyms}
 \begin{itemize}
@@ -37,17 +58,20 @@ third party, data source, synchronization, parameter, threshold,
 
 \subsubsection{Abbreviations}
 \begin{itemize}
-\item \textbf{D4H}: Data4Help
-\item \textbf{ASOS}: AutomatedSOS
-\item \textbf{T4R}: Track4Run
 \item \textbf{Gn}: n-th goal
 \item \textbf{Dn}: n-th domain assumption
 \item \textbf{Rn}: n-th functional requirement
 \end{itemize}
-\subsection{Revision history}
-quattro
-\subsection{Reference Documents}
-cinque
+
 \subsection{Document Structure}
-sei
-%what you write here is a comment that is not shown in the final text
+Chapter 1 gives an introduction to the problem and describes the goals and purpose of the application.
+
+Chapter 2 presents an overall description of the system. Firstly a description of the domain model and shared phenomena are provided coupled with detailed UML diagrams. Secondly the major functions of the system are more precisely specified and connected with the goals and domain constraints of the system.
+
+Chapter 3 contains all the requirements that the system must meet in order to accomplish the given goals. In particular mockups of the user interfaces, use cases and sequence diagrams are presented to give a complete description of what features the system should and should not offer.
+
+Chapter 4 includes the Alloy model with an example of a generated world.
+
+Chapter 5 shows the effort by each group member.
+
+Chapter 6 contains the references.

@@ -1,6 +1,58 @@
 \subsection{Purpose}
+The purpose of this document is to give a detailed description of the design of the TrackMe system. Starting from the requirements previously defined in the RASD, here we will focus on the implementation of the system, describing in more detail the architecture, the components, some deployment details and run-time processes.
+The main goal is to provide an overall guidance to the architecture of the product.
+
+With respect to the RASD, this document is addressed more specifically to the developers, managers, testers and system administrators that will have to implement, manage and maintain the system.
+
+Finally, in this document we will give an in-depth detail of all the internal and external services that the system will provide in order to reach the given goals. A particular attention will be given to authorization, data management and data retrieval, which are the main functions of our systems.
+ 
 \subsection{Scope}
-\subsection{Definitions, Acronyms, Abbreviations}
-\subsection{Revision History}
-\subsection{Reference Documents}
+
+The product is presented as an ecosystem of three major subsystems: Data4Help, AutomatedSOS and Track4Run.
+
+Data4Help provides an interface for sharing personal data between users and third parties in a secure and reliable way. These issues will lead us throughout all the design of the architecture of this subsystem.
+
+On the other hand, AutomatedSOS must monitor its user and call an ambulance in case of an emergency. Bearing this in mind, the architecture of this system will be developed to be as responsive as possible and minimize all possible delays.l
+
+Finally, Track4Run gives the possibility to organize, join and watch run events. In this case, the design of the system will be made to be very user-friendly and guarantee a good user experience.
+
+\subsection{Definitions, Abbreviations and Acronyms}
+\subsubsection{Acronyms}
+\begin{itemize}
+	\item \textbf{RASD}: Requirement Analysis and Specification Document
+	\item \textbf{API}: Application Programming Interface
+	\item \textbf{GPS}: Global Positioning System
+	\item \textbf{GDPR}: General Data Protection Regulation
+\end{itemize}
+
+\subsubsection{Abbreviations}
+\begin{itemize}
+	\item \textbf{Gn}: n-th goal
+	\item \textbf{Dn}: n-th domain assumption
+	\item \textbf{Rn}: n-th functional requirement
+\end{itemize}
+
+\FloatBarrier
+\subsection{Revision history}
+ // TODO
+ 
 \subsection{Document Structure}
+\begin{itemize}
+	\item \textbf{Chapter 1} 
+	Gives a general description of the document, its purpose an overview of product's characteristics. It also specifies some text conventions used throughout the document.
+	
+	\item \textbf{Chapter 2}
+	This section provides an inside view of the system, its components and the deployment of its parts.
+	Also a description of the architectural patterns and design decisions is given, in order to provide a detailed view of the whole system.
+	
+	\item \textbf{Chapter 3}
+	Here further details are given with respect to the User Interface already described in the RASD.
+	In particular, a storyboard of the user interaction will be provided in order to clarify the flow between the mock-ups.
+	
+	\item \textbf{Chapter 4}
+	Here we will explain how the goals decided in the RASD are met by our architecture and which component or interaction between components is responsible of implementing each requirement. 
+	
+	\item \textbf{Chapter 5}
+	Here we identify a priority for the development of each component in order to understand which activities should be carried out in parallel and what are the dependencies existing between the components.
+
+\end{itemize}

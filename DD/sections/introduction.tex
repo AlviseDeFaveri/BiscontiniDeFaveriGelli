@@ -1,18 +1,19 @@
 \subsection{Purpose}
-The purpose of this document is to give a detailed description of the design of the TrackMe system. Starting from the requirements previously defined in the RASD, here we will focus on the implementation of the system, describing in more detail the architecture, the components, some deployment details and run-time processes.
+The purpose of this document is to give a detailed description of the TrackMe system's design which has been developed starting from the requirements, defined in the RASD. The next sections will focus on the implementation of the system, describing in more detail the architecture, the components, the deployment  and the run-time processes that identify it.
 The main goal is to provide an overall guidance to the architecture of the product.
 
-With respect to the RASD, this document is addressed more specifically to the developers, managers, testers and system administrators that will have to implement, manage and maintain the system.
+Confronted to the RASD, this document is addressed more specifically to the developers, managers, testers and system administrators that will have to implement, manage and maintain the system.
 
-Finally, in this document we will give an in-depth detail of all the internal and external services that the system will provide in order to reach the given goals. A particular attention will be given to authorization, data management and data retrieval, which are the main functions of our systems.
+Moreover, this document will provide the reader with in-depth details of all the internal and external services that the system offers and needs in order to reach the given goals, with a particular attention for the responsibilities of each component and interface.
  
 \subsection{Scope}
 
-The product is presented as an ecosystem of three major subsystems: Data4Help, AutomatedSOS and Track4Run.
+The system is made of three sub-systems: Data4Help, AutomatedSOS and Track4Run. 
+Since each of them has a different purpose, their internal characteristics also reflect this difference. Nevertheless, the external interfaces of each subsystem has been accurately designed to minimize the potential inefficiencies when the whole system is pulled together.
 
-Data4Help provides an interface for sharing personal data between users and third parties in a secure and reliable way. These issues will lead us throughout all the design of the architecture of this subsystem.
+Data4Help provides a platform for sharing personal data between users and third parties, and this has to be done in a secure and reliable way: these issues will lead us throughout all the design of the architecture of this subsystem.
 
-On the other hand, AutomatedSOS must monitor its user and call an ambulance in case of an emergency. Bearing this in mind, the architecture of this system will be developed to be as responsive as possible and minimize all possible delays.l
+On the other hand, AutomatedSOS must monitor its user and call an ambulance in case of an emergency. Bearing this in mind, the architecture of this system will be developed to be as responsive as possible and minimize all possible delays.
 
 Finally, Track4Run gives the possibility to organize, join and watch run events. In this case, the design of the system will be made to be very user-friendly and guarantee a good user experience.
 
@@ -32,7 +33,7 @@ Finally, Track4Run gives the possibility to organize, join and watch run events.
 	\item \textbf{Rn}: n-th functional requirement
 \end{itemize}
 
-\FloatBarrier
+
 \subsection{Revision history}
  // TODO
  

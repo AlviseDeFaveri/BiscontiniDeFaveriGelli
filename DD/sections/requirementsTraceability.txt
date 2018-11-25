@@ -1,0 +1,33 @@
+[R1],[R2],[R3]: AuthenticationService (Register, Login, Unsubscribe)
+[R4]: DataSourceManager (Accept DataSource data gathering policy)
+[R5]: DataReciever + AuthenticationService 
+[R6]: AuthService
+[R7]: AuthService
+[R8]: SingleDataManager
+[R9]: GroupDataManager
+[R10]: GroupDataManager
+[R11]: SubscriptionService
+[R12]: RequestManager
+[R13]: DataReciever + SubscriptionService + DataSender
+[R14]: RequestManager
+[R15]: RequestManager + SubscriptionService
+[R16]: LogInService (AutomatedSOS) + AuthService
+[R17]: DataRetrivalService + MonitoringService (AutomatedSOS)
+[R18]: TODO: remove the requirement
+[R19]: ThresholdSettingService
+[R20]: ThresholdSettingService
+[R21]: LogInService + DataRetrivalService (too be seen if they're both needed)
+[R22]: ClientApplication + MonitoringService (via notification interface)
+[R23]: ClientApplication + MonitoringService 
+[R24]: MonitoringService
+[R25]: LogInService (Track4Run) + AuthService
+[R26]: RunCreation&Management
+[R27]: RunCreation&Management
+[R28]: RunCreation&Management
+[R29]: RunCreation&Management
+[R30]: RunCreation&Management (shows also past runs)
+[R31]: RunSearchService + EnrollmentManager
+[R32]: EnrollmentManager
+[R33]: DataRetrivalService
+[R34]: RunSearchService + SpectatorService
+[R35]: SpectatorService + ClientApplication

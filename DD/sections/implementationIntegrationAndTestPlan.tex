@@ -6,28 +6,56 @@ ordine dei sottosistemi: prima i back end e poi i front end in parallelo
 
 ordine componenti:
 
-\textbf{Data4Help}
+\subsubsection{Data4Help}
 
 \FloatBarrier
-\begin{figure}[!h]
+\begin{figure*}[ht!]
 	\centering
-	\includegraphics[width=\columnwidth]{d4h_dev_rcv.png}
-	\caption{Data Acquisition Module development steps}
-\end{figure} 
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\columnwidth]{rcv1.png}
+		\caption{Basic data acquisition functions}
+	\end{subfigure}%
+	~ 
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{rcv2.png}
+		\caption{Authentication and registration}
+	\end{subfigure}
+	
+	\caption{Data Acquisition Module development}
+\end{figure*}
 \FloatBarrier
 
 \FloatBarrier
-\begin{figure}[!h]
+\begin{figure*}[ht!]
 	\centering
-	\includegraphics[ height=0.9\textheight]{d4h_dev_send.png}
-	\caption{Data Request Module development steps}
-\end{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\columnwidth]{snd1.png}
+		\caption{Single Data requests}
+	\end{subfigure}%
+	~ \vspace{20px}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{snd2.png}
+		\caption{Group Data requests}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{snd3.png}
+		\caption{Subscription functionalities}
+	\end{subfigure}
+	
+	\caption{Data Request Module development}
+\end{figure*}
 \FloatBarrier
 
-\textbf{AutomatedSOS}
+\subsubsection{AutomatedSOS}
 Prima BE, poi external Interfaces, poi FE
 
-\textbf{Track4Run}
+\subsubsection{Track4Run}
 Prima BE, poi external Interfaces, poi FE
 
 \subsection{Integration and Testing}
@@ -38,30 +66,29 @@ Di base, quando i back end sono completati a meno di autenticazione
 \subsubsection{Elements to be Integrated}
 
 \FloatBarrier
-\begin{figure}[!h]
+\begin{figure*}[ht!]
 	\centering
-	\includegraphics[width=0.7\columnwidth]{sysInt1.png}
-	\caption{Step I - Back-ends integration}
-\end{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\columnwidth]{sysInt1.png}
+		\caption{Back-ends integration}
+	\end{subfigure}%
+	~ 
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{sysInt2.png}
+		\caption{External Interfaces integration}
+	\end{subfigure}
+
+	\caption{Subsystem Integration}
+\end{figure*}
 \FloatBarrier
 
-\vspace{2px}
- 
 \FloatBarrier
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\columnwidth]{sysInt2.png}
-	\caption{Step II - External Interfaces integration}
-\end{figure}
-\FloatBarrier
-
-\vspace{20px}
-
-\FloatBarrier
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=\columnwidth]{sysInt3.png}
-	\caption{Step III - Subsystems Front-ends integration}
+	\includegraphics[width=0.8\columnwidth]{sysInt3.png}
+	\caption{Front-ends integration}
 \end{figure}
 \FloatBarrier
 
@@ -69,10 +96,9 @@ Di base, quando i back end sono completati a meno di autenticazione
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\columnwidth]{sysInt4.png}
-	\caption{Step IV - External Services integration}
+	\caption{External Services integration}
 \end{figure}
 \FloatBarrier
-
 
 
 \subsubsection{Integration Testing Strategy}
@@ -80,4 +106,4 @@ bottom up o continuous integration?
 
 \subsubsection{Sequence of Component/Function Integration}
 
-componente per componente
+componente per componente?

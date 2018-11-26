@@ -15,7 +15,7 @@ In particular, Data4Help subsystem can be accessed via browser by users and thir
 
 AutomatedSOS and Track4Run instead are designed as applications with a thick client (i.e. smart-phone and smart-watch apps), a lightweight back-end server and a storage module. This design has been chosen because it is completely modular on one hand, since the two application's business logic is separated from Data4Help's one, but guarantees on the other hand a fast and reliable service provided by the servers, leaving the full responsibility of the presentation part to the mobile application. This separation also guarantees a good maintainability of the system and good performances on the mobile side, where power consumption and CPU usage can be an issue.
 
-\subsection{High Level Components}
+\subsection{High Level Architecture}
 
 \FloatBarrier
 \begin{figure}[!h]
@@ -25,8 +25,13 @@ AutomatedSOS and Track4Run instead are designed as applications with a thick cli
 \end{figure}
 \FloatBarrier
 
+
 \subsection{Component View}
-\subsubsection{Data4Help}
+
+
+\begin{itemize}
+	\item \textbf{Data4Help}
+\end{itemize}
 
 \FloatBarrier
 \begin{figure}[!h]
@@ -36,7 +41,11 @@ AutomatedSOS and Track4Run instead are designed as applications with a thick cli
 \end{figure}
 \FloatBarrier
 
-\subsubsection{AutomatedSOS}
+
+
+\begin{itemize}
+	\item \textbf{AutomatedSOS}
+\end{itemize}
 
 \begin{figure}[!h]
 	\centering
@@ -45,7 +54,11 @@ AutomatedSOS and Track4Run instead are designed as applications with a thick cli
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Track4Run}
+
+
+\begin{itemize}
+	\item \textbf{Track4Run}
+\end{itemize}
 
 \FloatBarrier
 \begin{figure}[!h]

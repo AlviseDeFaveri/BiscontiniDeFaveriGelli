@@ -17,11 +17,11 @@ DB --> REQ : reqID
 REQ --> TP : reqID
 REQ -> NOT : askPermission(VAT_Code, userID)
 deactivate REQ
-NOT -> User
-User --> NOT
+NOT -> User : send mail
+User --> NOT : grantPermission()
+NOT -> DB : modifyRequest(req_ID)
+DB --> NOT : OK
 NOT -> REQ : handleUserResponse(UserID, ReqID, response)
-REQ -> DB : modifyRequest(req_ID)
-DB --> REQ : OK
 REQ -> SND : send(req_ID)
 SND -> SND : builds message using filters and parameters
 SND -> TP

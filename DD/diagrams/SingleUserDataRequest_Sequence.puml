@@ -1,0 +1,28 @@
+@startuml
+actor ThirdParty as TP
+participant Sender as SND
+participant RequestManager as REQ
+participant AuthenticationModule as AUTH
+participant DataBase as DB
+participant NotificationService as NOT
+actor User
+
+TP -> REQ : askUserData(ReqParams, UserID, token, callback, isSub)
+activate REQ
+REQ -> AUTH: authRequest(token)
+AUTH --> REQ: VAT_Code
+REQ -> DB : addReqToDB(params, filters, callback, vat, isSub, initState)
+DB -> DB: check if it is aready existing
+DB --> REQ : reqID
+REQ --> TP : reqID
+REQ -> NOT : askPermission(VAT_Code, userID)
+deactivate REQ
+NOT -> User
+User --> NOT
+NOT -> REQ : handleUserResponse(UserID, ReqID, response)
+REQ -> DB : modifyRequest(req_ID)
+DB --> REQ : OK
+REQ -> SND : send(req_ID)
+SND -> SND : builds message using filters and parameters
+SND -> TP
+@enduml

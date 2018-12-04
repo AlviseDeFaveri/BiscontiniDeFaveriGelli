@@ -1,0 +1,27 @@
+@startuml
+actor ThirdParty as TP
+participant Sender as SND
+participant RequestManager as REQ
+participant AuthenticationModule as AUTH
+participant DataBase as DB
+participant AnonymizationModule as NOT
+
+TP -> REQ : askGroupData(ReqParams, filters, token, callback, isSub)
+activate REQ
+REQ -> AUTH: authRequest(token)
+activate AUTH
+AUTH --> REQ: VAT_Code
+deactivate AUTH
+REQ -> DB : addReqToDB(params, filters, callback, vat, isSub, initState)
+DB -> DB: check if it is aready existing
+DB --> REQ : reqID
+REQ --> TP : reqID
+REQ -> NOT : checkAnonym(req_ID)
+NOT -> DB : queryRequest
+DB --> NOT : number
+NOT -> REQ : ok
+REQ -> SND : send(req_ID)
+deactivate REQ
+SND -> SND : builds message using filters and parameters
+SND -> TP
+@enduml

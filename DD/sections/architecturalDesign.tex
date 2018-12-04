@@ -24,6 +24,7 @@ AutomatedSOS and Track4Run instead are designed as three-tier applications with 
 
 From the component point of view, each subsystem can be divided into \textit{back-end} components, which are responsible of carrying out the business logic of the subsystem, and \textit{front-end} components, which provide a presentation layer to end users and SDKs to external developers who want to access the system's services.
 Also, some external components are used to provide some of the services offered by the system.
+
 In the following diagram, the main components and interfaces are highlighted, to give a general idea of the design of the system.
 It must be noted that in this diagram components and \textit{modules} represent a set of services grouped together, and that internal interaction between modules is not shown for sake of simplicity: the complete description of all the modules and internal interfaces can be found in the following sections.
 
@@ -177,16 +178,27 @@ All other components shall use synchronous protocols, such as RESTful APIs.
 - New data arrives
 
 \subsection{Component Interfaces}
+
 \subsection{Selected Architectural Styles and Patterns}
-- stateless
-- microservice
-- monolithic
-- token auth
-- loose coupling
-- event driven and message queues
-- server side service discovery
+\begin{itemize}
+	\item microservice
+	\begin{itemize}
+		\item loose coupling
+		\item server side discovery
+		\item API gateway
+	\end{itemize}
+	\item event driven
+	\item stateless
+	\item RESTful API
+	\item MVC
+	\item toekn auth pattern
+\end{itemize}
+
+
 \subsection{Other Design Decisions}
-- NOSQL DB
-- JWT
-- REST
-- RabbitMQ
+\begin{itemize}
+	\item  NOSQL DB
+	\item  JWT
+	\item  REST
+	\item  RabbitMQ
+\end{itemize}

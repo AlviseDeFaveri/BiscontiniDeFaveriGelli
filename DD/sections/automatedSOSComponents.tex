@@ -1,0 +1,18 @@
+\begin{enumerate}
+    \item \textbf{Client Application:} application on user's device responsible of providing a graphical interface to the user and of interacting with the back end  services of AutomatedSOS.
+    \item \textbf{Threshold Setting Service:} gives to the user the possibility to change the default threshold values of his tracked parameters and save them in the dedicated database. 
+    \item \textbf{Data Analytics Service:} allows the user to check the aggregated statistics about the data collected until then with a given granularity. 
+    \item \textbf{Login Service:} responsible of authenticating the user by using his Data4Help credentials using the SDK services provided by the Third Party SDK component.
+    \item \textbf{Monitoring Service:} is responsible of monitoring the data coming from Data4Help and, whenever a threshold is exceeded, interacting with the external Ambulance Calling Interface which in turn will communicate to the ambulances the location of the user in danger.
+    \item \textbf{Third Party SDK:} communicates with Data4Help by using his Authentication and Data Request interfaces.
+\end{enumerate}
+
+\begin{enumerate}
+    \item \textbf{Client Application:} application that runs on user's device responsible of providing a graphical interface to the user and of interacting with the back end services of Track4Run. It also interacts with an external Maps Interface in order to retrieve the maps that will be used by the application.
+    \item \textbf{Run Creation and Management Service:} gives the user the possibility to create, edit and delete a run event by interacting with the Run database.
+    \item \textbf{Run Search Service:} gives the user the possibility to browse all the created run events stored in the Run database.
+    \item \textbf{Spectator Service:} is responsible of retrieving runners position during the run and then forwarding it to the Client Application which in turn will display the positions of the runners on a map.
+    \item \textbf{Enrollment Service:} allows the user to enroll in a created run event. In this way he will be added to the list of participants.
+    \item \textbf{Third Party SDK:} communicates with Data4Help by using his Authentication and Data Request interfaces.
+    \item \textbf{Login Service:} responsible of authenticating the user by using his Data4Help credentials using the SDK services provided by the Third Party SDK component.
+\end{enumerate}

@@ -1,37 +1,56 @@
 \subsection{Implementation Plan}
-strategia bottom up
+In the implementation phase of our project we decided to follow a bottom-up strategy. In particular, starting from the Data4Help subsystem, we will implement each component separately and then perform unit tests on it. By adopting this strategy we incrementally develop working components.
+As it concerns the implementation order, we decided to start from the Data4Help back-end module, since we think is the most critical one because the other two subsystems work on top of it.
+In a second time, developer SDKs should be completed before the other two subsystem's back-end development can be carried out.
+Finally, we can integrate front-ends in all our systems.
+The order could be the following:
 
-generale order:
-- prima D4H BE di base
-- SDK
-- other BE
-- front ends
+\begin{enumerate}
+    \item Data4Help back-end
+    \item Third Party SDK
+    \item Data Source SDK
+    \item Automated SOS and Track4Run back-end
+    \item Data4Help front-end
+    \item AutomatedSOS and Track4Run front-end
+\end{enumerate}
 
-... disegnini ...
+The following diagrams are meant to provide a more precise overview of our implementation plan:
 
 \subsection{Integration and Testing}
-\subsubsection{Entry Criteria}
-Dopo aver settato l'ambiente di sviluppo si può considerare iniziata la fase di integrazione continua.
 
-In particolare, bisogna settare:
-- microservice containers
-- api gateway
-- message queue server
-- service registry
-
-\subsubsection{Elements to be Integrated}
-generale order:
-- prima D4H BE di base
-- SDK
-- other BE
-- front ends
 
 \subsubsection{Integration Testing Strategy}
-appena un elemento viene sviluppato, deve essere sottoposto a unit-testing. passata la fase di unit-testing, verrà testato integrandolo nel sistema già presente (continuous integration).
+We decided to follow a continuous integration strategy: as soon as a first version of a component is released, we need to test it and then integrate it with the already existing components of the system.
+Once each back-end have been completely developed and integrated, it's highly recommended to carry out a system testing process. In particular:
+
+\begin{itemize}
+    \item Performance Testing: in each system, we need to monitor the responsiveness of the services with respect to incoming requests. In particular, Data4Help should be very fast in managing new data samples to guarantee a fluid service to the third-parties. In addition, AutomatedSOS needs to be extremely fast in detecting and responding to an emergency. Lastly, Track4Run user experience is heavily influenced by the back-end performances, which should be for this reason flawless.
+    \item Load Testing: 
+    \item Stress Testing:
+\end{itemize}
+
+\subsubsection{Entry Criteria}
+Before starting with the continuous integration phase, is necessary to set up the development environment. In particular, we need the following components:
+
+\begin{itemize}
+    \item \textbf{Microservices Containers:} needed to deploy a distributed microservice cluster
+    \item \textbf{API Gateway:} provides a unified interface for redirecting service requests
+    \item \textbf{Message Queue Server:} used for inter-service asynchronous communication
+    \item \textbf{Service Registry:} holds the reference to all the microservices of the cluster
+\end{itemize}
+
+\subsubsection{Elements to be Integrated}
+We can divide our components in groups considering the existing dependencies between them.
+
+
+
+
+
+the subsystems integration phase can start. Finally we think that
 
 Poi tutti i back-end verrano testati.
 
 Infine LOAD e STRESS test.
 
 \subsubsection{Sequence of Component/Function Integration}
-Vedi implementation plan.
+Since we adopted a continuous integration strategy, the integration phase runs in parallel  with the implementation phase, which is carefully described in the previous diagrams.

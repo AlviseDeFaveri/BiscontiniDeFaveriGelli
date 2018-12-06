@@ -14,43 +14,155 @@ The order could be the following:
     \item AutomatedSOS and Track4Run front-end
 \end{enumerate}
 
-The following diagrams are meant to provide a more precise overview of our implementation plan:
 
-\subsection{Integration and Testing}
+The following diagrams are meant to provide a more precise overview of our implementation plan.
 
+\subsubsection{Data4Help Basic Back-End}
 
-\subsubsection{Integration Testing Strategy}
-We decided to follow a continuous integration strategy: as soon as a first version of a component is released, we need to test it and then integrate it with the already existing components of the system.
-Once each back-end have been completely developed and integrated, it's highly recommended to carry out a system testing process. In particular:
+The first components to be developed should be the ones that guarantee the basic back-end functions of the Data4Help, which means all the services that are related to data acquisition and data requests. 
+
+Here is a digram representing a possible order in which these components should be developed. As already stated, after each development phase a \textit{Unit Test} phase and an \textit{Integration Test} phase should follow, in order to validate the new component and verify its integration with the previously developed system.
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{d4h_dev.png}
+	\caption{Data4Help Development Plan}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Developer's SDKs}
+The Third Party SDK and Data Sources SDK must be carried out after Data4Help basic back-end is completed and before developing other back-ends. This will guarantee the AutomatedSOS and Track4Run subsystems to be able to properly interact with the Data4Help APIs.
+
+In particular, there is no dependency between the two SDKs, but certainly the Third-Party SDK is the most important one in this phase, since AutomatedSOS and Data4Help development depend on it. In case this SDK's development is found to take a long time, the two subsystem's development can start independently, and integrate the SDKs in a second moment.
+
+\subsubsection{AutomatedSOS and Track4Run Back-Ends}
+After the SDKs are developed, the remaining two subsystems' back-ends can be developed in a fully parallel line. Like in the case of Data4Help, an incremental approach is recommended in these development phases, and Unit and Integration test should be performed at every step.
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{other_be_dev.png}
+	\caption{Data4Help Development Plan}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Front-Ends and External Services Integration}
+Finally, the front-ends can be developed and the subsystems can be integrated with the external services. Each front-end is obviously independent from the others, and the external service integration can as well be performed separately for each subsystem.
 
 \begin{itemize}
-    \item Performance Testing: in each system, we need to monitor the responsiveness of the services with respect to incoming requests. In particular, Data4Help should be very fast in managing new data samples to guarantee a fluid service to the third-parties. In addition, AutomatedSOS needs to be extremely fast in detecting and responding to an emergency. Lastly, Track4Run user experience is heavily influenced by the back-end performances, which should be for this reason flawless.
-    \item Load Testing: 
-    \item Stress Testing:
+	\item \textbf{Data4Help}
+\end{itemize}
+
+\FloatBarrier	
+\begin{figure*}[ht!]	
+	\centering	
+	\begin{subfigure}[t]{0.5\textwidth}	
+		\centering	
+		\includegraphics[width=\columnwidth]{d4h_int1.png}	
+		\caption{Stage I}	
+	\end{subfigure}%	
+	~ \vspace{20px}	
+	\begin{subfigure}[t]{0.5\textwidth}	
+		\centering	
+		\includegraphics[width=\columnwidth]{d4h_int2.png}	
+		\caption{Stage II}	
+	\end{subfigure}	
+	\begin{subfigure}[t]{0.5\textwidth}	
+		\centering	
+		\includegraphics[width=\columnwidth]{d4h_int3.png}	
+		\caption{Stage III}	
+	\end{subfigure}	
+	
+	\caption{Data4Help Front-End Integration Steps}	
+\end{figure*}	
+
+\FloatBarrier
+	
+\begin{itemize}
+	\item \textbf{AutomatedSOS}
+\end{itemize}
+
+
+\FloatBarrier
+\begin{figure*}[ht!]	
+	\centering	
+	\begin{subfigure}[t]{0.5\textwidth}	
+		\centering	
+		\includegraphics[width=0.5\columnwidth]{autosos_int1.png}	
+		\caption{Stage I}	
+	\end{subfigure}%	
+	~ \vspace{20px}	
+	\begin{subfigure}[t]{0.5\textwidth}	
+		\centering	
+		\includegraphics[width=0.5\columnwidth]{autosos_int2.png}	
+		\caption{Stage II}	
+	\end{subfigure}	
+	\caption{AutomatedSOS Final Integration Steps}	
+\end{figure*}	
+
+\FloatBarrier
+
+\begin{itemize}
+	\item \textbf{Track4Run}
+\end{itemize}
+
+
+\FloatBarrier
+\begin{figure*}[ht!]	
+	\centering	
+	\begin{subfigure}[t]{0.3\textwidth}	
+		\centering	
+		\includegraphics[width=0.8\columnwidth]{t4r_int1.png}	
+		\caption{Stage I}	
+	\end{subfigure}%		
+	~ \vspace{20px}	
+	\begin{subfigure}[t]{0.3\textwidth}	
+		\centering	
+		\includegraphics[width=0.8\columnwidth]{t4r_int2.png}	
+		\caption{Stage II}	
+	\end{subfigure}
+	~ \vspace{20px}
+	\begin{subfigure}[t]{0.3\textwidth}	
+		\centering	
+		\includegraphics[width=0.8\columnwidth]{t4r_int3.png}	
+		\caption{Stage III}	
+	\end{subfigure}	
+	
+	\caption{Track4Run Final Integration Steps}	
+\end{figure*}	
+\FloatBarrier
+
+\subsection{Integration and Testing}
+\subsubsection{Integration Testing Strategy}
+With respect to the integration between developed components, we decided to follow a \textit{continuous integration} strategy: as soon as a first version of a component is released, we need to test it and then integrate it with the already existing components of the system. This strategy has been chosen because it enables the developers to have many checkpoints where they can test their product and makes it easy to found bugs early in the development of the system, so that if things break, they break small.
+
+ 
+Once each back-end have been completely developed and integrated, it's also highly recommended to carry out a system testing process. In particular:
+
+\begin{itemize}
+    \item \textbf{Performance Testing:} in each system, we need to monitor the responsiveness of the services with respect to incoming requests. In particular, Data4Help should be very fast in managing new data samples to guarantee a fluid service to the third-parties. In addition, AutomatedSOS needs to be extremely fast in detecting and responding to an emergency. Lastly, Track4Run user experience is heavily influenced by the back-end performances, which should be for this reason flawless.
+    \item \textbf{Load Testing:} 
+    \item \textbf{Stress Testing:}
 \end{itemize}
 
 \subsubsection{Entry Criteria}
-Before starting with the continuous integration phase, is necessary to set up the development environment. In particular, we need the following components:
+As stated above, continuous integration forces the testing phase to start as soon as a component is merged with the main product. However, it is necessary to be sure that a correct environment is setup before integration can be effectively carried out. In particular, in case of Data4Help we need the following components:
 
 \begin{itemize}
-    \item \textbf{Microservices Containers:} needed to deploy a distributed microservice cluster
-    \item \textbf{API Gateway:} provides a unified interface for redirecting service requests
-    \item \textbf{Message Queue Server:} used for inter-service asynchronous communication
-    \item \textbf{Service Registry:} holds the reference to all the microservices of the cluster
+    \item \textit{Microservices Containers:} needed to deploy a distributed microservice cluster
+    \item \textit{API Gateway:} provides a unified interface for redirecting service requests
+    \item \textit{Message Queue Server:} used for inter-service asynchronous communication
+    \item \textit{Service Registry:} holds the reference to all the microservices of the cluster
+    \item \textit{DataBase Managment System:} provides entrypoints to the DataBases
 \end{itemize}
 
+For AutomatedSOS and Track4Run instead we need the web server and firewalls to be correctly set-up and the \textit{Third-Party SDK} to be available and already tested against the Data4Help request APIs.
+
 \subsubsection{Elements to be Integrated}
-We can divide our components in groups considering the existing dependencies between them.
+As seen in the development plan, we can divide our components in groups considering the existing dependencies between them.
 
-
-
-
-
-the subsystems integration phase can start. Finally we think that
-
-Poi tutti i back-end verrano testati.
-
-Infine LOAD e STRESS test.
+// TODO
 
 \subsubsection{Sequence of Component/Function Integration}
 Since we adopted a continuous integration strategy, the integration phase runs in parallel  with the implementation phase, which is carefully described in the previous diagrams.

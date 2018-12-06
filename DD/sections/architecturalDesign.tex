@@ -54,7 +54,6 @@ The other two back-ends are mainly responsible of exploiting Data4Help's service
 \end{itemize}
 
 Finally there are the external services: for AutomatedSOS, an external ambulance calling interface is needed by the back-end to fulfill its goals, while in Track4Run a Maps Service such as \textit{Google Maps} should be accessed directly from the Application to minimize latency and bandwidth occupation in the communication between the client and the server.
-\\
 
 Another definition of the services offered by the system can be found in the figure below, which highlights the dependencies between the Data4Help system and its actors and provides a list of the services consumed internally and externally by the system.
 
@@ -85,7 +84,7 @@ The whole system's internal and external services can be divided into five layer
 
 \subsubsection{Data4Help}
 
-Here is a detailed view of the components of the Data4Help subsystem: each service is to be considered as independently deployed and can be replicated in many instances, following the typical microservice cluster architecture. For the sake of simplicity, only the interaction between developed components is highlighted, while the components dedicated to load balancing, orchestration and services deployment are considered to be at an underlying level (see \textit{Figure 3: System Layers Architecture} in \textit{Section 2.2}).
+Here is a detailed view of the components of the Data4Help subsystem: each service is to be considered as independently deployed and can be replicated in many instances, following the typical microservice cluster architecture. 
 
 
 \FloatBarrier
@@ -99,6 +98,14 @@ Here is a detailed view of the components of the Data4Help subsystem: each servi
 
 The internal microservices that have been identified are:
 \begin{itemize}
+	\item \textbf{API Gateway}: This is the single entrypoint through which all other services can be accessed. For more information see \textit{API Gateway Pattern} in \textit{Section 2.7}. In this diagram, other components are also represented in the API Gateway:
+	\begin{itemize}
+		\item \textit{Load Balancer:} realizes the balancing between different instances of the same services, deciding where to redirect each request.
+		\item \textit{Service Registry:} keeps track of all the deployed services instances.
+		\item \textit{Service Orchestrator:} is responsible of managing the deployment of new service and manage the failure of existing ones..
+		\item \textit{Message Broker:} enables messaging between services.
+	\end{itemize}
+	Please note that the interaction between these components and the rest of the system is not represented, for the sake of simplicity. All these services are part of the internal services layer as already mentioned, and are considered to be something already present during the development of this system.
 	\item \textbf{Authentication Service}: this service is in charge of producing tokens when new users register and verifying incoming tokens when requests are made to the API Gateway.
 	\item \textbf{User Service}: this service provides an interface for the Web Application. The main functions of this service are Account Management functions, such as password changing, name setting etc., and functions related to the management of the preferred data-source for each tracked parameter.
 	\item \textbf{Receiver}: this service is responsible of managing a new incoming data-source packet, verifying the user preferences for that data-source and eventually saving the packet on the DB. It is also responsible of notifying the subscription service with the ID of the received parameter, so that the appropriate third parties can be notified of the new data.
@@ -155,6 +162,17 @@ This subsystem shall also use messaging between microservices where asyncronous 
 	\item \textbf{Login Service:} responsible of authenticating the user by using his Data4Help credentials using the SDK services provided by the Third Party SDK component.
 \end{itemize}
 
+\subsubsection{Entity-Relationship Diagram}
+The following diagram provides a graphical representation of the data entities of the system. In the diagrams, different colours represent the three different subsystems.
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\columnwidth]{ER.png}
+	\caption{Entity-Relationship Diagram}
+\end{figure}
+\FloatBarrier
+
 
 \subsection{Deployment View}
 
@@ -171,33 +189,53 @@ Data4Help on the onther hand follows the microservices pattern, in particular th
 \FloatBarrier
 
 \subsection{Runtime View}
-- Auth
-- One-shot req
-- Subscription req
-- New data arrives
+Many sequence diagrams which show the interaction between the users and the system are already present in the RASD. However, some of the internal details of the runtime phase of our application will be given below.
+
+\begin{itemize}
+	\item \textbf{auth}
+\end{itemize}
+	
+- new data
+- sub
+- one-shot
+- group
 
 \subsection{Component Interfaces}
 
 \subsection{Selected Architectural Styles and Patterns}
 \begin{itemize}
-	\item microservice
+	\item \textbf{Loose Coupling}: the first principle we followed in the design of the whole product is loose coupling, which means that we tried to minimize the dependencies between components of a subsystem and between the three subsystems as well. This means that each subsystem can be developed, deployed and maintained separately, which gives to the system a good flexibility for future development.
+	
+	\item \textbf{Stateless Components}: since one of our major concerns is the reliability of our system and how good it recovers from situations of partial unavailability, our components are designed to be stateless. This means that each component reads and writes on a DataBase at every step of its work, so that if one of the services is temporarily down, its state can be easily recovered from the DB.
+	
+	\item \textbf{MVC}: For AutomatedSOS and Track4Run subsystems, we decided to adopt a standard \textit{Model-View-Controller} monolithic architecture. This gives the possibility to the developers of this subsystems to use well-known commercial solutions to implement this applications.
+	
+	\item \textbf{Client-Server Pattern}: The classical division of the MVC pattern between Model and View is reinforced by using the client-server pattern, in which there is a client which asks for resource and a server that must provided these resources. For AutomatedSOS and Track4Run the client is a \textit{Thick-Client} which takes care of the whole presentation part, whereas in the Data4Help subsystem we have a \textit{thin-client} application for the users, which is their browser.
+	
+	\item \textbf{Microservice Architecture Pattern}: For Data4Help instead we decided to implement a microservice architecture patter. The idea behind a microservice-based architecture is to apply the \textit{SOA} pattern (\textit{Service Oriented Architecture}) inside a big project, breaking it down in small pieces that act independently, communicate asynchronously and can be deployed in any fashion and number. This pattern is used in Data4Help because the achievement of high availability and scalability can be easily reached by decoupling the single functions of the system and deploying them independently in large numbers.
+	
+	In particular, for this microservice design we decided to adopt the following principles:
 	\begin{itemize}
-		\item loose coupling
-		\item server side discovery
-		\item API gateway
+		\item \textit{API Gateway Pattern}: A single entrypoint is provided for external access to the services. This gateway will then redirect the incoming calls to the single service. This gives us the possibilities to  unify the management of request authentication, load balancing and eventually performance testing. Please note that the gateway too can be scaled by adding another gateway that have the same service registry in common.
+		
+		\item \textit{Server Side Discovery}: This method is a way of keeping track of which are the services available on the system an where their instances can be found. It uses a \textit{Service Registry} at a known location where new services register themselves when deployed, so that the Gateway/Load Balancer can read the register to know where to redirect requests.
+		
+		\item \textit{Asynchronous Queueing}: This pattern is used together with the \textit{Event Driven Architecture} pattern to achieve asynchronous and non-blocking communication between services. In our case, we implement asynchronous queueing when using message queues for sharing information and notifications between services. In this way, when service A has to call service B, it only has to send a message and then it can continue with his job, even if the other service is temporarily unavailable.
+		
+		\item \textbf{Access Tokens}: The API Gateway authenticates the request and passes an access token that securely identifies the requestor in each request to the services. A service can include the access token in requests it makes to other services.
 	\end{itemize}
-	\item event driven
-	\item stateless
-	\item RESTful API
-	\item MVC
-	\item toekn auth pattern
+
+	\item \textbf{RESTful API}: When asynchronous communication is not possible or desirable, for example during external calls to the system's services, a REST architecture is use to build RESTful APIs that can be accessed by software written in any language. This is another way in which we decouple the functions of our system.
 \end{itemize}
 
 
 \subsection{Other Design Decisions}
+While taking design decisions, some implementation-level solutions have been explored to better understand the possible problems during the implementation of the system.
+In particular, these are some technologies that have been taken in account.
+
 \begin{itemize}
-	\item  NOSQL DB
-	\item  JWT
-	\item  REST
-	\item  RabbitMQ
+	\item  \textit{NoSQL Databases}: One of the key features of these kind of databases is scalability, and apparently they are very integrated in many frameworks used for developing microservices, so these kind of databases should be taken in account.
+	\item  \textit{JWT}: JSON Access Token is one of the standards for authentication. It is lightweight, cross-platform and easy to use. Alternatively, a possible solution to authentication could be using \textit{Oauth2} servers.
+	\item  \textit{Containers}: containers are used a lot in microservices deployment, and should be considered for the implementation of the Data4Help subsystem: they have some security drawbacks with respect to Virtual-Machines or other cloud-based solutions, but surely are a fast and reliable way to manage many instances in a microservice cluster.
+	\item  \textit{Real-Time Performance Analyzer}: some services, like \textit{Prometheus} for example, enable the analysis of a container cluster to monitor performance. This tools an be easily used to dynamically scale our application if more or less computational power is needed over time.
 \end{itemize}

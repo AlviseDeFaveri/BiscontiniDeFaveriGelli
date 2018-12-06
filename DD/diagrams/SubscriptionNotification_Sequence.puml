@@ -1,8 +1,8 @@
 @startuml
 skinparam monochrome true
-actor User
+actor DataSource as DS
 participant Receiver as RCV
-participant AuthenticationModule as AUTH
+participant AuthenticationService as AUTH
 participant SubscriptionService as SUB
 participant DataBase as DB
 participant AnonymizationModule as ANON
@@ -10,29 +10,54 @@ participant Sender as SND
 actor ThirdParty as TP
 
 DS -> RCV  : sendData(token, paramType, value)
+activate RCV
 RCV -> AUTH : auth(request)
+activate AUTH
 AUTH --> RCV : return DS_ID
+deactivate AUTH
 RCV -> DB : saveData(DS_ID, paramType, value)
+activate DB
 DB --> RCV: return user ID
+deactivate DB
 RCV -> SUB: notify(userID)
+deactivate RCV
+activate SUB
+
 SUB -> DB: checkFilter(type=userID, value=userID)
+activate DB
 DB --> SUB: return List<req_id>
+deactivate DB
 
 loop
 SUB -> SND: send(req_id)
+activate SND
 SND -> SND : buildResponse (req_id)
+activate SND
+deactivate SND
 SND ->TP : sendResponse(response)
+deactivate SND
 end loop
 
 SUB -> DB: checkFilter(type=any, user=userID)
+activate DB
 DB -> DB : check all filters for each group
+activate DB
+deactivate DB
 DB --> SUB: return List<req_id>
+deactivate DB
 
 loop
 SUB -> ANON : checkAnon(req_id)
+activate ANON
 ANON --> SUB : OK
+deactivate ANON
 SUB -> SND: send(req_id)
+deactivate SUB
+activate SND
 SND -> SND : buildResponse (req_id)
+activate SND
+deactivate SND
 SND ->TP : sendResponse(response)
+deactivate SND
 end loop
 @enduml

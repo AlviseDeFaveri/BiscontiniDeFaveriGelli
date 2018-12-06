@@ -176,6 +176,8 @@ The following diagram provides a graphical representation of the data entities o
 
 \subsection{Deployment View}
 
+// TODO comments and better deployment diagram
+
 The deployment for the three subsystems reflect the architecture that has been described in the previous sections. In particular, the AutomatedSOS and Track4Run deployment will follow a simple application-style pattern, with a Node.js back-end that can be easily built and a standard SQL DB.
 
 Data4Help on the onther hand follows the microservices pattern, in particular the API Gateway and Service Discovery patterns: a Gateway API, deployed on a dedicated machine, will filter all the incoming request and forward them to the single services. Every back-end service is instead deployed in a container, that can be located in a physical or virtual machine, and new instances of a service can be deployed when needed. On the side of this microservice cluster, entities such as a container orchestrator, a load balancer, a service registry and a message broker are needed to properly manage the cluster. These have to be deployed in a dedicated and reliable machine of the internal network.
@@ -191,14 +193,44 @@ Data4Help on the onther hand follows the microservices pattern, in particular th
 \subsection{Runtime View}
 Many sequence diagrams which show the interaction between the users and the system are already present in the RASD. However, some of the internal details of the runtime phase of our application will be given below.
 
+// TODO comments
+
 \begin{itemize}
-	\item \textbf{auth}
+	\item \textbf{New Data Arrival}
 \end{itemize}
-	
-- new data
-- sub
-- one-shot
-- group
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\columnwidth]{newdata_seq.png}
+	\caption{New Data Arrival Sequence Diagram}
+\end{figure}
+\FloatBarrier
+
+\begin{itemize}
+	\item \textbf{Single Request}
+\end{itemize}
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\columnwidth]{singleuser_seq.png}
+	\caption{Single User Data Request Sequence Diagram}
+\end{figure}
+\FloatBarrier
+
+\begin{itemize}
+	\item \textbf{Group Data Request}
+\end{itemize}
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\columnwidth]{group_seq.png}
+	\caption{Group Data Request Sequence Diagram}
+\end{figure}
+\FloatBarrier
+
 
 \subsection{Component Interfaces}
 

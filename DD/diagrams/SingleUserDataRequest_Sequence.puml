@@ -1,28 +1,50 @@
 @startuml
+skinparam monochrome true
+
 actor ThirdParty as TP
 participant Sender as SND
 participant RequestManager as REQ
-participant AuthenticationModule as AUTH
+participant AuthenticationService as AUTH
 participant DataBase as DB
-participant NotificationService as NOT
+participant UserNotificationService as NOT
 actor User
 
 TP -> REQ : askUserData(ReqParams, UserID, token, callback, isSub)
 activate REQ
 REQ -> AUTH: authRequest(token)
+activate AUTH
 AUTH --> REQ: VAT_Code
+deactivate AUTH
 REQ -> DB : addReqToDB(params, filters, callback, vat, isSub, initState)
+activate DB
 DB -> DB: check if it is aready existing
+activate DB
+deactivate DB
 DB --> REQ : reqID
+deactivate DB
 REQ --> TP : reqID
-REQ -> NOT : askPermission(VAT_Code, userID)
+REQ -> NOT : sendPermissionRequest(VAT_Code, userID)
 deactivate REQ
+activate NOT
 NOT -> User : send mail
+activate User
 User --> NOT : grantPermission()
+deactivate User
 NOT -> DB : modifyRequest(req_ID)
+activate DB
 DB --> NOT : OK
+deactivate DB
+
 NOT -> REQ : handleUserResponse(UserID, ReqID, response)
+deactivate NOT
+activate REQ
+
 REQ -> SND : send(req_ID)
+deactivate REQ
+activate SND
 SND -> SND : builds message using filters and parameters
+activate SND
+deactivate SND
 SND -> TP
+deactivate SND
 @enduml

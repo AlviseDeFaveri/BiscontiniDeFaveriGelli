@@ -1,10 +1,11 @@
 @startuml
+skinparam monochrome true
 actor ThirdParty as TP
 participant Sender as SND
 participant RequestManager as REQ
-participant AuthenticationModule as AUTH
+participant AuthenticationService as AUTH
 participant DataBase as DB
-participant AnonymizationModule as NOT
+participant AnonymizationService as NOT
 
 TP -> REQ : askGroupData(ReqParams, filters, token, callback, isSub)
 activate REQ
@@ -12,16 +13,44 @@ REQ -> AUTH: authRequest(token)
 activate AUTH
 AUTH --> REQ: VAT_Code
 deactivate AUTH
+
+
 REQ -> DB : addReqToDB(params, filters, callback, vat, isSub, initState)
+activate DB
 DB -> DB: check if it is aready existing
+activate DB
+deactivate DB
 DB --> REQ : reqID
+deactivate DB
+
 REQ --> TP : reqID
 REQ -> NOT : checkAnonym(req_ID)
-NOT -> DB : queryRequest
-DB --> NOT : number
+activate NOT
+NOT -> DB : query
+activate DB
+DB --> NOT : numberOfUsers
+deactivate DB
+
+alt
 NOT -> REQ : ok
 REQ -> SND : send(req_ID)
 deactivate REQ
+activate SND
 SND -> SND : builds message using filters and parameters
-SND -> TP
+activate SND
+deactivate SND
+SND -> TP: Data
+deactivate SND
+
+else
+
+NOT -> REQ : nok
+activate REQ
+REQ -> SND : send(error)
+deactivate REQ
+activate SND
+SND -> TP: Error
+deactivate SND
+
+end
 @enduml

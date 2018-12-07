@@ -176,17 +176,15 @@ The following diagram provides a graphical representation of the data entities o
 
 \subsection{Deployment View}
 
-// TODO comments and better deployment diagram
+The deployment for the three subsystems reflect the architecture that has been described in the previous sections. In particular, the AutomatedSOS and Track4Run deployment will follow a simple application-style pattern, with a lightweight back-end (e.g. NodeJS) and a DataBase server (SQL or NoSQL).
 
-The deployment for the three subsystems reflect the architecture that has been described in the previous sections. In particular, the AutomatedSOS and Track4Run deployment will follow a simple application-style pattern, with a Node.js back-end that can be easily built and a standard SQL DB.
-
-Data4Help on the onther hand follows the microservices pattern, in particular the API Gateway and Service Discovery patterns: a Gateway API, deployed on a dedicated machine, will filter all the incoming request and forward them to the single services. Every back-end service is instead deployed in a container, that can be located in a physical or virtual machine, and new instances of a service can be deployed when needed. On the side of this microservice cluster, entities such as a container orchestrator, a load balancer, a service registry and a message broker are needed to properly manage the cluster. These have to be deployed in a dedicated and reliable machine of the internal network.
+Data4Help on the other hand follows the microservices architecture pattern, in particular the API Gateway and Server-Side Discovery patterns: an \textit{API Gateway}, deployed on a dedicated machine, will filter all the incoming requests and forward them to the single services. To know where services are located, a \textit{Service Registry} has to be deployed at a know address. Every back-end service is instead deployed in a separated \textit{container}, that can be located in a physical or virtual machine, and new instances of a service can be deployed when needed. On the side of this microservice cluster, entities such as a container orchestrator, a load balancer and a message broker are needed to properly manage the cluster. These have to be deployed in dedicated and reliable machines that are part of the internal network.
 
 \FloatBarrier
 \begin{figure}[!h]
 	\centering
-	\includegraphics[angle=90, height=0.9\textheight]{deploymentDiagram.png}
-	\caption{System Deployment Diagram}
+	\includegraphics[width=\linewidth]{deploymentDiagram.png}
+	\caption{Data4Help Deployment Diagram}
 \end{figure}
 \FloatBarrier
 

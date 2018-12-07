@@ -4,31 +4,28 @@ actor DataSource as DS
 participant Receiver as RCV
 participant AuthenticationService as AUTH
 participant SubscriptionService as SUB
-participant DataBase as DB
-participant AnonymizationModule as ANON
+participant AnonymizationService as ANON
 participant Sender as SND
 actor ThirdParty as TP
 
 DS -> RCV  : sendData(token, paramType, value)
 activate RCV
-RCV -> AUTH : auth(request)
+RCV -> AUTH : auth(token)
 activate AUTH
 AUTH --> RCV : return DS_ID
 deactivate AUTH
-RCV -> DB : saveData(DS_ID, paramType, value)
-activate DB
-DB --> RCV: return user ID
-deactivate DB
-RCV -> SUB: notify(userID)
+RCV -> RCV : saveData(DS_ID, paramType, value)
+activate RCV
+deactivate RCV
+RCV -> SUB: notify(userID, paramType)
 deactivate RCV
 activate SUB
 
-SUB -> DB: checkFilter(type=userID, value=userID)
-activate DB
-DB --> SUB: return List<req_id>
-deactivate DB
+SUB -> SUB: checkSingleSubscriptions(userID)
+activate SUB
+deactivate SUB
 
-loop
+loop for each single user subscription
 SUB -> SND: send(req_id)
 activate SND
 SND -> SND : buildResponse (req_id)
@@ -38,15 +35,11 @@ SND ->TP : sendResponse(response)
 deactivate SND
 end loop
 
-SUB -> DB: checkFilter(type=any, user=userID)
-activate DB
-DB -> DB : check all filters for each group
-activate DB
-deactivate DB
-DB --> SUB: return List<req_id>
-deactivate DB
+SUB -> SUB: checkGroups(userID, paramType)
+activate SUB
+deactivate SUB
 
-loop
+loop for each group data subscription
 SUB -> ANON : checkAnon(req_id)
 activate ANON
 ANON --> SUB : OK

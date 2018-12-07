@@ -4,7 +4,6 @@ actor ThirdParty as TP
 participant Sender as SND
 participant RequestManager as REQ
 participant AuthenticationService as AUTH
-participant DataBase as DB
 participant AnonymizationService as NOT
 
 TP -> REQ : askGroupData(ReqParams, filters, token, callback, isSub)
@@ -15,36 +14,30 @@ AUTH --> REQ: VAT_Code
 deactivate AUTH
 
 
-REQ -> DB : addReqToDB(params, filters, callback, vat, isSub, initState)
-activate DB
-DB -> DB: check if it is aready existing
-activate DB
-deactivate DB
-DB --> REQ : reqID
-deactivate DB
+REQ -> REQ : addGroupReq(params, filters, callback, VAT_Code)
+activate REQ
+deactivate REQ
 
-REQ --> TP : reqID
-REQ -> NOT : checkAnonym(req_ID)
+REQ -> NOT : isAnonymizable(req_ID)
 activate NOT
-NOT -> DB : query
-activate DB
-DB --> NOT : numberOfUsers
-deactivate DB
 
-alt
-NOT -> REQ : ok
+alt anonymizable group
+NOT --> REQ : YES
+
 REQ -> SND : send(req_ID)
 deactivate REQ
 activate SND
 SND -> SND : builds message using filters and parameters
 activate SND
 deactivate SND
-SND -> TP: Data
+SND -> TP: GroupData
 deactivate SND
 
-else
+else not enough users
 
-NOT -> REQ : nok
+NOT -> REQ : NO
+deactivate NOT
+
 activate REQ
 REQ -> SND : send(error)
 deactivate REQ

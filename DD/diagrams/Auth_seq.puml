@@ -1,0 +1,57 @@
+@startuml
+skinparam monochrome true
+
+actor ServiceConsumer as user
+participant APIGateway as gate
+participant AuthenticationService as auth
+participant InternalService as serv
+
+alt registration
+
+user -> gate: register(credentials)
+activate gate
+	gate -> auth: addUser(credentials)
+	activate auth
+	auth --> gate: authToken
+	deactivate auth
+gate --> user: authToken
+deactivate gate
+
+else login
+
+user -> gate: login(credentials)
+activate gate
+	gate -> auth: login(credentials)
+	activate auth
+	auth -> auth: check(credentials)
+	activate auth
+	deactivate auth
+	auth --> gate: authToken
+	deactivate auth
+gate --> user: authToken
+deactivate gate
+
+end
+
+... ...
+
+user -> gate: doSomething(<b>authToken</b>, otherParams)
+activate gate
+	gate -> auth: verify(<b>authToken</b>)
+	activate auth
+	auth -> auth: check(<b>authToken</b>)
+	activate auth
+	deactivate auth
+	auth --> gate: userID
+	deactivate auth
+
+	gate -> serv: doSomething(userID, otherParams)
+	activate serv
+	serv --> gate: returnValue
+	deactivate serv
+gate --> user: returnValue
+deactivate gate
+
+
+
+@enduml

@@ -5,7 +5,6 @@ actor ThirdParty as TP
 participant Sender as SND
 participant RequestManager as REQ
 participant AuthenticationService as AUTH
-participant DataBase as DB
 participant UserNotificationService as NOT
 actor User
 
@@ -13,29 +12,30 @@ TP -> REQ : askUserData(ReqParams, UserID, token, callback, isSub)
 activate REQ
 REQ -> AUTH: authRequest(token)
 activate AUTH
-AUTH --> REQ: VAT_Code
+AUTH --> REQ: VAT
 deactivate AUTH
-REQ -> DB : addReqToDB(params, filters, callback, vat, isSub, initState)
-activate DB
-DB -> DB: check if it is aready existing
-activate DB
-deactivate DB
-DB --> REQ : reqID
-deactivate DB
-REQ --> TP : reqID
-REQ -> NOT : sendPermissionRequest(VAT_Code, userID)
+REQ -> REQ : addSingleReq(params, callback, VAT)
+activate REQ
 deactivate REQ
+REQ -> NOT : sendPermissionRequest(VAT_Code, userID)
 activate NOT
+REQ --> TP : req_ID
+deactivate REQ
 NOT -> User : send mail
+deactivate NOT
 activate User
-User --> NOT : grantPermission()
-deactivate User
-NOT -> DB : modifyRequest(req_ID)
-activate DB
-DB --> NOT : OK
-deactivate DB
 
-NOT -> REQ : handleUserResponse(UserID, ReqID, response)
+... ...
+
+User -> NOT : grant permission
+deactivate User
+activate NOT
+
+NOT -> NOT : modifyRequest(req_ID)
+activate NOT
+deactivate NOT
+
+NOT -> REQ : notifyUserResponse(UserID, ReqID, response)
 deactivate NOT
 activate REQ
 
@@ -45,6 +45,6 @@ activate SND
 SND -> SND : builds message using filters and parameters
 activate SND
 deactivate SND
-SND -> TP
+SND -> TP: UserData
 deactivate SND
 @enduml

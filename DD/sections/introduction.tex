@@ -1,38 +1,38 @@
 \subsection{Purpose}
-The purpose of this document is to give a detailed description of the TrackMe system's design which has been developed starting from the requirements, defined in the RASD. The next sections will focus on the implementation of the system, describing in more detail the architecture, the components, the deployment  and the run-time processes that identify it.
-The main goal is to provide an overall guidance to the architecture of the product.
 
-Confronted to the RASD, this document is addressed more specifically to the developers, managers, testers and system administrators that will have to implement, manage and maintain the system.
+The purpose of this document is to give a detailed description of the TrackMe system's design which has been developed starting from the requirements, defined in the RASD. The next sections will focus on the implementation of the system, describing more precisely the architecture, the components, the deployment  and the run-time processes that identify it.
+The main goal is to provide an overall analysis of the product architecture.
+
+With respect to the RASD, this document is addressed more specifically to the developers, managers, testers and system administrators that will have to implement, manage and maintain the system.
 
 Moreover, this document will provide the reader with in-depth details of all the internal and external services that the system offers and needs in order to reach the given goals, with a particular attention for the responsibilities of each component and interface.
  
 \subsection{Scope}
 
 The system is made of three sub-systems: Data4Help, AutomatedSOS and Track4Run. 
-Since each of them has a different purpose, their internal characteristics also reflect this difference. Nevertheless, the external interfaces of each subsystem has been accurately designed to minimize the potential inefficiencies when the whole system is pulled together.
+Since each of them has a different purpose, their internal characteristics also reflect this difference. Nevertheless, the external interfaces of each subsystem have been accurately designed to minimize the potential inefficiencies when the whole system is pulled together.
 
-In particular, Data4Help provides a platform for sharing personal data between users and third parties, and this has to be done in a secure and reliable way: these issues lead the design of the whole architecture of this subsystem.
+In particular, Data4Help provides a platform for sharing personal data between users and third parties, and this must be done in a secure and reliable way: these issues lead the design of the whole architecture of this subsystem.
 
-On the other hand, AutomatedSOS must monitor its users and call an ambulance in case of an emergency. Bearing this in mind, the architecture of this subsystem will be developed to be as responsive as possible and minimize all possible delays.
+On the other hand, AutomatedSOS monitors its users state of health and, in case of emergency, calls an ambulance. Bearing this in mind, the architecture of this subsystem will be developed to be as responsive as possible and minimize all the possible delays.
 
-Finally, Track4Run gives the possibility to organize, join and watch run events. For this reason, user-friendliness and user experience are the main concerns of this subsystem, which will be developed to be easy to access and navigate in all its many functionalities.
+Finally, Track4Run gives the possibility to organize, join and watch run events. For this reason, user-friendliness and user experience are the main concerns of this subsystem, which will be developed to be easy to access and navigate in all its many features.
 
 \subsection{Definitions, Abbreviations and Acronyms}
-\subsubsection{Definitions}
-\begin{itemize}
-	\item \textbf{Microservice}:
-	\item \textbf{Orchestrator}: 
-	\item \textbf{Container}: 
-	\item \textbf{API Gateway}:
-	\item \textbf{Firewall}:
-\end{itemize}
 
 \subsubsection{Acronyms}
+
 \begin{itemize}
-	\item \textbf{RASD}: Requirement Analysis and Specification Document
-	\item \textbf{API}: Application Programming Interface
-	\item \textbf{SDK}: Software Development Kit
-	\item \textbf{DB}: Data Base
+	\item \textbf{RASD:} Requirement Analysis and Specification Document
+	\item \textbf{TP:} third party
+	\item \textbf{DS:} data source
+	\item \textbf{API:} Application Programming Interface
+	\item \textbf{SDK:} Software Development Kit
+	\item \textbf{DB:} Data Base
+	\item \textbf{MVC:} Model-View-Controller
+	\item \textbf{JSON:} JavaScript Object Notation
+	\item \textbf{JWT:} JSON  Web Tokens
+	\item \textbf{REST:} Representational State Transfer
 \end{itemize}
 
 \subsubsection{Abbreviations}
@@ -42,27 +42,34 @@ Finally, Track4Run gives the possibility to organize, join and watch run events.
 	\item \textbf{Rn}: n-th functional requirement
 \end{itemize}
 
-
 \subsection{Revision history}
- // TODO
- 
+\begin{center}
+    \begin{tabu} to \textwidth { | X[c] X[c] X[c] | }
+        \hline
+        \textbf{Revision} & \textbf{Date} & \textbf{Changelog}\\
+        \hline
+        \hline
+        1.0 & 10/12/2018 & First document issue\\
+        \hline
+    \end{tabu}
+\end{center}
+
 \subsection{Document Structure}
+
 \begin{itemize}
 	\item \textbf{Chapter 1} 
-	Gives a general description of the document, its purpose an overview of product's characteristics. It also specifies some text conventions used throughout the document.
+	Gives a general description of the document, its purpose and an overview of the product's characteristics. It also specifies some text conventions used throughout the document.
 	
 	\item \textbf{Chapter 2}
 	This section provides an inside view of the system, its components and the deployment of its parts.
 	Also a description of the architectural patterns and design decisions is given, in order to provide a detailed view of the whole system.
 	
 	\item \textbf{Chapter 3}
-	Here further details are given with respect to the User Interface already described in the RASD.
-	In particular, a storyboard of the user interaction will be provided in order to clarify the flow between the mock-ups.
+	This chapter refers to section \textit{3.1.1 - User Interface} of the RASD.
 	
 	\item \textbf{Chapter 4}
-	Here we will explain how the goals decided in the RASD are met by our architecture and which component or interaction between components is responsible of implementing each requirement. 
+	Here we will explain how the goals stated in the RASD are met by our architecture by providing a traceability matrix. 
 	
 	\item \textbf{Chapter 5}
-	Here we identify a priority for the development of each component in order to understand which activities should be carried out in parallel and what are the dependencies existing between the components.
-
+	Here we identify a priority for the development and integration of each component in order to understand which activities should be carried out in parallel and what are the dependencies existing between the components.
 \end{itemize}

@@ -1,58 +1,59 @@
+The design choices that were made for the TrackMe system have always kept in mind the fulfillment of the goals and requirements defined in the RASD. Below the reader can find three tables, one for each subsystem, where each requirement is mapped with the component or function that aims to fulfill it.
+
 \begin{table}
-\begin{adjustwidth}{-4cm}{}
+\begin{adjustwidth}{-3,5cm}{}
 \captionsetup{justification=centering}
 \caption{Data4Help requirements traceability matrix}
   \label{tab:table1}
 \begin{tabular}{|l||l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
-\cellcolor[HTML]{EFEFEF}                      & \cellcolor[HTML]{EFEFEF} R1 & \cellcolor[HTML]{EFEFEF} R2 & \cellcolor[HTML]{EFEFEF} R3 & \cellcolor[HTML]{EFEFEF} R4 & \cellcolor[HTML]{EFEFEF} R5 & \cellcolor[HTML]{EFEFEF} R6 & \cellcolor[HTML]{EFEFEF} R7 & \cellcolor[HTML]{EFEFEF} R8 & \cellcolor[HTML]{EFEFEF} R9 &\cellcolor[HTML]{EFEFEF}  R10 & \cellcolor[HTML]{EFEFEF} R11 & \cellcolor[HTML]{EFEFEF} R12 & \cellcolor[HTML]{EFEFEF} R13 & \cellcolor[HTML]{EFEFEF} R14 & \cellcolor[HTML]{EFEFEF} R15\\ \hline \hline
-\cellcolor[HTML]{EFEFEF}AuthenticationService & $\checkmark$  & $\checkmark$  & $\checkmark$  &    & $\checkmark$  & $\checkmark$  & $\checkmark$  &    &    &     &     &     &     &     & \\ \hline
-\cellcolor[HTML]{EFEFEF}DataSourceManager     &    &    &    & $\checkmark$  &    &    &    &    &    &     &     &     &     &     & \\ \hline
-\cellcolor[HTML]{EFEFEF}Data Receiver         &    &    &    &    & $\checkmark$  &    &    &    &    &     &     &     & $\checkmark$   &     & \\ \hline
-\cellcolor[HTML]{EFEFEF} SingleDataManager    &    &    &    &    &    &    &    & $\checkmark$  &    &     &     &     &     &     & \\ \hline
-\cellcolor[HTML]{EFEFEF} GroupDataManagement  &    &    &    &    &    &    &    &    & $\checkmark$  & $\checkmark$   &     &     &     &     & $\checkmark$ \\ \hline
-\cellcolor[HTML]{EFEFEF} SubscriptionService  &    &    &    &    &    &    &    &    &    &     & $\checkmark$   &     & $\checkmark$   &     & \\ \hline
-\cellcolor[HTML]{EFEFEF} RequestManager       &    &    &    &    &    &    &    &    &    &     &     & $\checkmark$   &     & $\checkmark$   & $\checkmark$ \\ \hline
-\cellcolor[HTML]{EFEFEF} DataSender           &    &    &    &    &    &    &    &    &    &     &     &     & $\checkmark$   &     & \\ \hline
+\cellcolor[HTML]{EFEFEF}                      &\cellcolor[HTML]{EFEFEF}R1 & \cellcolor[HTML]{EFEFEF}R2 & \cellcolor[HTML]{EFEFEF}R3 & \cellcolor[HTML]{EFEFEF}R4 & \cellcolor[HTML]{EFEFEF}R5 & \cellcolor[HTML]{EFEFEF}R6 & \cellcolor[HTML]{EFEFEF}R7 & \cellcolor[HTML]{EFEFEF}R8 & \cellcolor[HTML]{EFEFEF}R9 &\cellcolor[HTML]{EFEFEF}R10 & \cellcolor[HTML]{EFEFEF}R11 & \cellcolor[HTML]{EFEFEF}R12 & \cellcolor[HTML]{EFEFEF}R13 & \cellcolor[HTML]{EFEFEF}R14 & \cellcolor[HTML]{EFEFEF}R15\\ \hline \hline
+\cellcolor[HTML]{EFEFEF}Authentication  & $\checkmark$  &  & $\checkmark$  &    & $\checkmark$  & $\checkmark$  & $\checkmark$  &    &    &     &     &     &     &     & \\ \hline
+\cellcolor[HTML]{EFEFEF} User Management      &    & $\checkmark$   &    & $\checkmark$  &    &    &    &    &    &     &     &     &     &     & \\ \hline
+\cellcolor[HTML]{EFEFEF} Receiver         &    &    &    &    & $\checkmark$  &    &    &    &    &     &     &     & $\checkmark$   &     & \\ \hline
+\cellcolor[HTML]{EFEFEF} User Notification     &    &    &    &    &    &    &    & $\checkmark$  &    &     &     &     &     &     & \\ \hline
+\cellcolor[HTML]{EFEFEF} Anonymization   &    &    &    &    &    &    &    &    & $\checkmark$  & $\checkmark$   &     &     &     &     & $\checkmark$ \\ \hline
+\cellcolor[HTML]{EFEFEF} Subscription   &    &    &    &    &    &    &    &    &    &     & $\checkmark$   &     & $\checkmark$   &     & \\ \hline
+\cellcolor[HTML]{EFEFEF} Request Management       &    &    &    &    &    &    &    &    & $\checkmark$  &     &     & $\checkmark$   &     & $\checkmark$   & $\checkmark$ \\ \hline
+\cellcolor[HTML]{EFEFEF} Sender           &    &    &    &    &    &    &    &    &    &     &     &     & $\checkmark$   &     & \\ \hline
+\cellcolor[HTML]{EFEFEF} Requests DB           &    &    &    &    &    &    &    &    &    &     &  $\checkmark$   &     &   &     & \\ \hline
 \end{tabular}
 \end{adjustwidth}
 \end{table}
 
 
 \begin{table}
-\begin{adjustwidth}{-4cm}{}
+\begin{adjustwidth}{-3,5cm}{}
 \captionsetup{justification=centering}
 \caption{AutomatedSOS requirements traceability matrix}
   \label{tab:table2}
 \begin{tabular}{|l||l|l|l|l|l|l|l|l|}
 \hline
-\cellcolor[HTML]{EFEFEF}                      & \cellcolor[HTML]{EFEFEF} R16 & \cellcolor[HTML]{EFEFEF} R17 & \cellcolor[HTML]{EFEFEF} R18 & \cellcolor[HTML]{EFEFEF} R19 & \cellcolor[HTML]{EFEFEF} R20 & \cellcolor[HTML]{EFEFEF} R21 & \cellcolor[HTML]{EFEFEF} R22 & \cellcolor[HTML]{EFEFEF} R23 \\ \hline \hline
-\cellcolor[HTML]{EFEFEF}AuthenticationService & $\checkmark$  &    &    &   &   &   &    &    \\ \hline
-\cellcolor[HTML]{EFEFEF}LoginService     &  $\checkmark$  &       &   &    & $\checkmark$   &    &    &    \\ \hline
-\cellcolor[HTML]{EFEFEF}DataRetrievalService         &    & $\checkmark$     &    &   &  $\checkmark$  &    &    &   \\ \hline
-\cellcolor[HTML]{EFEFEF} Monitoring Service    &    &   $\checkmark$ &      &    &    &  $\checkmark$  & $\checkmark$  &  $\checkmark$  \\ \hline
-\cellcolor[HTML]{EFEFEF} ThresholdSettingService  &    &       &  $\checkmark$  &  $\checkmark$  &    &    &    &    \\ \hline
-\cellcolor[HTML]{EFEFEF} ClientApplication  &    &    &       &    &    &  $\checkmark$  &  $\checkmark$  &     \\ \hline
+\cellcolor[HTML]{EFEFEF}                      & \cellcolor[HTML]{EFEFEF}R16 & \cellcolor[HTML]{EFEFEF}R17 & \cellcolor[HTML]{EFEFEF}R19 & \cellcolor[HTML]{EFEFEF}R20 & \cellcolor[HTML]{EFEFEF}R21 & \cellcolor[HTML]{EFEFEF}R22 & \cellcolor[HTML]{EFEFEF}R23 & \cellcolor[HTML]{EFEFEF}R24 \\ \hline \hline
+\cellcolor[HTML]{EFEFEF}Login Service     &  $\checkmark$  &       &   &    & $\checkmark$   &    &    &    \\ \hline
+\cellcolor[HTML]{EFEFEF}Third Party SDK         &    & $\checkmark$     &    &   &  $\checkmark$  &    &    &   \\ \hline
+\cellcolor[HTML]{EFEFEF}Monitoring Service    &    &   $\checkmark$ &      &    &    &  $\checkmark$  & $\checkmark$  &  $\checkmark$  \\ \hline
+\cellcolor[HTML]{EFEFEF}Threshold Setting Service  &    &       &  $\checkmark$  &  $\checkmark$  &    &    &    &    \\ \hline
+\cellcolor[HTML]{EFEFEF}Client Application  &    &    &       &    &    &  $\checkmark$  &  $\checkmark$  &     \\ \hline
 \end{tabular}
 \end{adjustwidth}
 \end{table}
 
 \begin{table}
-\begin{adjustwidth}{-4cm}{}
+\begin{adjustwidth}{-3,5cm}{}
 \captionsetup{justification=centering}
 \caption{Track4Run requirements traceability matrix}
   \label{tab:table3}
 \begin{tabular}{|l||l|l|l|l|l|l|l|l|l|l|l|}
 \hline
-\cellcolor[HTML]{EFEFEF}                      & \cellcolor[HTML]{EFEFEF} R24 & \cellcolor[HTML]{EFEFEF} R25 & \cellcolor[HTML]{EFEFEF} R26 & \cellcolor[HTML]{EFEFEF} R27 & \cellcolor[HTML]{EFEFEF} R28 & \cellcolor[HTML]{EFEFEF} R29 & \cellcolor[HTML]{EFEFEF} R30 & \cellcolor[HTML]{EFEFEF} R31 & \cellcolor[HTML]{EFEFEF} R32 & \cellcolor[HTML]{EFEFEF} R33 & \cellcolor[HTML]{EFEFEF} R34\\ \hline \hline
-\cellcolor[HTML]{EFEFEF} AuthenticationService & $\checkmark$  &   &  &    &   &   &   &    &   &   &   \\ \hline
-\cellcolor[HTML]{EFEFEF}LoginService     &  $\checkmark$  &    &    &   &    &    &    &    &   &   &  \\ \hline
-\cellcolor[HTML]{EFEFEF}RunCreationManagement         &    & $\checkmark$   &  $\checkmark$  &  $\checkmark$  & $\checkmark$  &  $\checkmark$  &    &    &   &   & \\ \hline
-\cellcolor[HTML]{EFEFEF} RunSearchService    &    &    &    &    &    &    &  $\checkmark$ &   &  & $\checkmark$ & \\ \hline
-\cellcolor[HTML]{EFEFEF} EnrollmentManager  &    &    &    &    &    &    & $\checkmark$   &  $\checkmark$  &   &   & \\ \hline
-\cellcolor[HTML]{EFEFEF} SpectatorService  &    &    &    &    &   &    &    &    &   &  $\checkmark$ & \\ \hline
-\cellcolor[HTML]{EFEFEF} DataRetrievalService  &    &    &    &    &    &    &    &    &  $\checkmark$   &   &  \\ \hline
-\cellcolor[HTML]{EFEFEF} ClientApplication  &    &    &    &    &    &    &    &    &     &   & $\checkmark$ \\ \hline
+\cellcolor[HTML]{EFEFEF}                      & \cellcolor[HTML]{EFEFEF}R24 & \cellcolor[HTML]{EFEFEF}R25 & \cellcolor[HTML]{EFEFEF}R26 & \cellcolor[HTML]{EFEFEF}R27 & \cellcolor[HTML]{EFEFEF}R28 & \cellcolor[HTML]{EFEFEF}R29 & \cellcolor[HTML]{EFEFEF}R30 & \cellcolor[HTML]{EFEFEF}R31 & \cellcolor[HTML]{EFEFEF}R32 & \cellcolor[HTML]{EFEFEF}R33 & \cellcolor[HTML]{EFEFEF}R34\\ \hline \hline
+\cellcolor[HTML]{EFEFEF}Login Service     &  $\checkmark$  &    &    &   &    &    &    &    &   &   &  \\ \hline
+\cellcolor[HTML]{EFEFEF}Run Creation Management         &    & $\checkmark$   &  $\checkmark$  &  $\checkmark$  & $\checkmark$  &  $\checkmark$  &    &    &   &   & \\ \hline
+\cellcolor[HTML]{EFEFEF}Run Search Service    &    &    &    &    &    &    &  $\checkmark$ &   &  & $\checkmark$ & \\ \hline
+\cellcolor[HTML]{EFEFEF}Enrollment Manager  &    &    &    &    &    &    & $\checkmark$   &  $\checkmark$  &   &   & \\ \hline
+\cellcolor[HTML]{EFEFEF}Spectator Service  &    &    &    &    &   &    &    &    &   &  $\checkmark$ & \\ \hline
+\cellcolor[HTML]{EFEFEF}Third Party SDK  &    &    &    &    &    &    &    &    &  $\checkmark$   &   &  \\ \hline
+\cellcolor[HTML]{EFEFEF}Client Application  &    &    &    &    &    &    &    &    &     &   & $\checkmark$ \\ \hline
 \end{tabular}
 \end{adjustwidth}
 \end{table}

@@ -13,19 +13,27 @@
 % Page Layout
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-% Package to manage images
+% Packages to manage images
 \usepackage{graphicx}
 \usepackage[section]{placeins}
 \usepackage[skip=15pt]{caption}
 \usepackage{subcaption}
-% Package to manage tables
+% Packages to manage tables
 \usepackage{tabu}
+
+% Package for hyperlinks
+\usepackage{hyperref}
+\hypersetup{colorlinks,urlcolor=blue}
 % Path to the images
 \graphicspath{{images/}}
 
-\title{TrackMe Software Design Document}								% Title
-\author{Andrea Biscontini, Marco Gelli, Alvise de' Faveri Tron}								% Author
-\date{Dec 2018}											% Date
+
+% Title
+\title{TrackMe Software Design Document}
+% Authors
+\author{Andrea Biscontini, Marco Gelli, Alvise de' Faveri Tron}
+% Date
+\date{Dec 2018}
 
 \makeatletter
 \let\thetitle\@title

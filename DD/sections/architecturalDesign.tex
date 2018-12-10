@@ -173,7 +173,16 @@ The following diagram provides a graphical representation of the data entities o
 \FloatBarrier
 
 \subsection{Deployment View}
-The deployment of the three subsystems reflects the architecture described in the previous sections. AutomatedSOS and Track4Run follow the client-server pattern, with a lightweight back-end (e.g. NodeJS) and a DB server (SQL or NoSQL).
+The deployment of the three subsystems reflects the architecture described in the previous sections. AutomatedSOS and Track4Run follow the client-server pattern, with a lightweight back-end (e.g. Servlet) and a DB server (SQL or NoSQL).
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{AppDepl.png}
+	\caption{AutomatedSOS and Track4Run Deployment Diagram}
+\end{figure}
+\FloatBarrier
+
 On the other hand Data4Help follows the microservices architecture pattern. In particular, the API Gateway and Server-Side Discovery patterns are applied: an \textit{API Gateway}, deployed on a dedicated machine, will filter all the incoming requests and forward them to the single services. To know where these services are located, a \textit{Service Registry} has to be deployed at a known address. Each back-end service is instead deployed in a separated \textit{container}, located in a physical or virtual machine, so that 
 a new instance of a service can be deployed in a new container when needed. On the side of this microservice cluster, entities such as a Container Orchestrator, Load Balancer, Performance Monitor and a Message Broker are needed to properly manage the cluster. These have to be deployed in containers inside dedicated and reliable machines that are part of the internal network, to achieve scalability.
 
